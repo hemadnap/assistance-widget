@@ -117,7 +117,7 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
-    src: url('./Roboto/stic/Roboto-Bold.ttf') format('truetype');
+    src: url('./Roboto/Roboto-Bold.ttf') format('truetype');
 }
 
 @font-face {
