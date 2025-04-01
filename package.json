@@ -1,6 +1,5 @@
 {
   "scripts": {
-    "dev": "nodemon server.js",
     "build": "npx rollup -c",
     "build:watch": "npx rollup -c --watch",
     "test": "echo \"No tests defined\" && exit 0"

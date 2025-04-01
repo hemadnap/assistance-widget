@@ -51,7 +51,7 @@ export default {
         copy({
             targets: [
                 // Need to copy the files over for usage
-                { src: "src/assets/fonts", dest: "dist/assets" },
+                { src: "src/assets", dest: "dist/assets" },
             ],
         }), 
         postcss({
@@ -59,13 +59,6 @@ export default {
             minimize: true, // Minifies the CSS
             sourceMap: true, // Generates source maps for debugging
             use: ['sass'], // Use the Sass preprocessor for SCSS files
-            plugins: [
-                url({
-                    // source /src/assets/fonts/*
-                    url: 'copy', // Copies font files to the output directory
-                    assetsPath: 'fonts', // Output directory for fonts
-                })
-            ]
         })
     ]
 };

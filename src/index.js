@@ -1,5 +1,4 @@
-import './assets/fonts/barlow.scss';
-import './assets/fonts/roboto.scss';
+import './assets/fonts/fonts.css';
 
 import './elements/feedback-widget/feedback-widget.js';
-import './elements/pre-footer/pre-footer.js';
+import './elements/pre-footer-widget/pre-footer-widget.js';
