@@ -1,0 +1,33 @@
+Branding:
+   - What naming convention has to be used on the widget components ?
+
+
+Edge cases:
+   - The user already sent feedback, the device ID prevent him from sending new feedback.
+
+
+Design:
+   - The user submits a fedback, does the widget displays a success message ? Does it closes ? 
+   - What happens when we click on the pre-footer buttons:
+      - chat: open the chat widget
+      - Phone: ?
+      - Contact form: ?
+      - Appointment: ?
+   - When the feedback widget closes, does it stay somewhere ? Minimized version, at the bottom of the screen ?
+   - Feedback text has a limit of 256 characters.
+   - Info to the user to not disclose personal info.
+
+
+Widget parameters:
+   - Feedback widget
+      - isRating
+      - isText
+      - isClosed/isOpen
+      - language ?
+   - pre-footer
+      - which button to display
+      - button interaction content ?
+
+
+Design system:
+   - Ask Iason Foscolos if there is a vanilla JS version of the IAF design system.

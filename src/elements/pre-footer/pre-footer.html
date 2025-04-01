@@ -1,0 +1,326 @@
+<link
+   rel="preconnect"
+   href="https://fonts.googleapis.com"
+>
+<link
+   rel="preconnect"
+   href="https://fonts.gstatic.com"
+   crossorigin
+>
+<link
+   href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap"
+   rel="stylesheet"
+>
+
+<div class="pre-footer">
+
+   <header>
+      <div
+         id="header-title"
+         class="title"
+      ></div>
+   </header>
+
+   <main>
+      <div class="button-list">
+         <!-- Chat -->
+         <div
+            id="chat-button"
+            class="assistance-button"
+         >
+            <div class="left">
+               <div class="icon">
+                  <img
+                     src="/src/assets/icons/conversation.svg"
+                     alt=""
+                  >
+               </div>
+               <div class="content">
+                  <div
+                     class="title"
+                  ></div>
+                  <div
+                     class="description"
+                  ></div>
+               </div>
+            </div>
+            <div class="right">
+               <img
+                  src="/src/assets/icons/chevron-right.svg"
+                  alt=""
+               >
+            </div>
+         </div>
+
+         <!-- Phone -->
+         <div
+            id="phone-button"
+            class="assistance-button"
+         >
+            <div class="left">
+               <div class="icon">
+                  <img
+                     src="/src/assets/icons/phone.svg"
+                     alt=""
+                  >
+               </div>
+               <div class="content">
+                  <div
+                     class="title"
+                  ></div>
+                  <div
+                     class="description"
+                  ></div>
+               </div>
+            </div>
+            <div class="right">
+               <img
+                  src="/src/assets/icons/chevron-right.svg"
+                  alt=""
+               >
+            </div>
+         </div>
+
+         <!-- Contact -->
+         <div
+            id="contact-button"
+            class="assistance-button"
+         >
+            <div class="left">
+               <div class="icon">
+                  <img
+                     src="/src/assets/icons/message.svg"
+                     alt=""
+                  >
+               </div>
+               <div class="content">
+                  <div
+                     class="title"
+                  ></div>
+                  <div
+                     class="description"
+                  ></div>
+               </div>
+            </div>
+            <div class="right">
+               <img
+                  src="/src/assets/icons/chevron-right.svg"
+                  alt=""
+               >
+            </div>
+         </div>
+
+         <!-- Appointlent -->
+         <div
+            id="appointment-button"
+            class="assistance-button"
+         >
+            <div class="left">
+               <div class="icon">
+                  <img
+                     src="/src/assets/icons/calendar.svg"
+                     alt=""
+                  >
+               </div>
+               <div class="content">
+                  <div
+                     class="title"
+                  ></div>
+                  <div
+                     class="description"
+                  ></div>
+               </div>
+            </div>
+            <div class="right">
+               <img
+                  src="/src/assets/icons/chevron-right.svg"
+                  alt=""
+               >
+            </div>
+         </div>
+
+         <!-- Office -->
+         <div
+            id="office-button"
+            class="assistance-button"
+         >
+            <div class="left">
+               <div class="icon">
+                  <img
+                     src="/src/assets/icons/location.svg"
+                     alt=""
+                  >
+               </div>
+               <div class="content">
+                  <div
+                     class="title"
+                  ></div>
+                  <div
+                     class="description"
+                  ></div>
+               </div>
+            </div>
+            <div class="right">
+               <img
+                  src="/src/assets/icons/chevron-right.svg"
+                  alt=""
+               >
+            </div>
+         </div>
+      </div>
+
+      <div
+         id="info"
+         class="info"
+      ></div>
+   </main>
+</div>
+
+<style scoped>
+   :root {
+      --color-blue: #6EC8F2;
+      --color-dark-blue: #006F9E;
+      --color-black: #2B2D42;
+      --color-gray: #6D6E83;
+      --color-shadow: #0C0F1E1A;
+      --color-background: #FFFFFF;
+      --color-light-gray: #F5F5F5;
+   }
+
+   .pre-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 32px;
+      width: 100%;
+      padding: 50px 120px;
+   }
+
+   /* Header */
+   header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      width: 100%;
+   }
+
+   header .title {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 40px;
+      color: #2B2D42;
+   }
+
+   /* main */
+   main {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      background-color: var(--color-light-gray);
+      border-radius: 10px;
+      box-shadow: 0 0 10px var(--color-shadow);
+   }
+
+   /* Assistance button */
+   .assistance-button {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px 24px;
+      background: white;
+      border: 2px solid #006F9E;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 279px;
+      height: 80px;
+      transition: .1s;
+   }
+
+   .assistance-button:hover {
+      background-color: #DAF2FC;
+   }
+
+   .assistance-button:active {
+      background-color: #B6E8FF;
+   }
+
+    .button-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 24px;
+   }
+
+   .assistance-button .left {
+      display: flex;
+      align-items: start;
+      justify-content: center;
+      gap: 12px;
+      padding: 10px 0;
+   }
+
+   .assistance-button .left .icon {
+      padding: 5px 0;
+   }
+
+   .assistance-button .left .icon img {
+      width: 28px;
+      height: 28px;
+   }
+
+   .assistance-button .left .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 10px 0;
+      gap: 5px;
+   }
+
+   .assistance-button .left .content .title {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 24px;
+      color: var(--color-dark-blue);
+   }
+
+   .assistance-button .left .content .description {
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      color: var(--color-gray);
+   }
+
+   .assistance-button .right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   .assistance-button .right img {
+      width: 16px;
+      height: 16px;
+   }
+
+
+   /* Info */
+   .info {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+      color: #474A5E;
+   }
+
+
+   /* Mobile breakpoint */
+   @media (max-width: 768px) {
+      .pre-footer {}
+   }
+</style>

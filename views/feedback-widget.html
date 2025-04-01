@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+   >
+   <title>Feedback Widget</title>
+   <style>
+      html,
+      body {
+         display: flex;
+         flex-direction: column;
+         padding: 10px;
+         margin: 0;
+         width: 100vw;
+         height: 100vh;
+         overflow: hidden;
+         font-family: "Roboto", sans-serif;
+      }
+
+      .nav {
+         display: flex;
+         flex-direction: column;
+         gap: 10px;
+      }
+   </style>
+</head>
+
+<body>
+   <h1>Feedback widget</h1>
+   <div class="nav"></div>
+   <a href="/">Back</a>
+   </div>
+
+   <div class="">
+      <a href="http://localhost:3000/feedback-widget?sdg-feed-min=0&sdg-feed-rating=1&sdg-feed-text=1&sdg-feed-open=1&sdg-feed-overlay-click=0&sdg-button-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946">Opened & closeable & overlay not closing</a>
+      <br>
+      <a href="http://localhost:3000/feedback-widget?sdg-feed-min=1&sdg-feed-rating=1&sdg-feed-text=1&sdg-feed-open=0&sdg-feed-overlay-click=1&sdg-button-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946">Minified & closeable & overlay closing</a>
+   </div>
+
+   <!-- feedback-widget -->
+   <feedback-widget></feedback-widget>
+
+   <!-- import the feedback-widget element -->
+   <link
+      rel="stylesheet"
+      href="/dist/bundle.css"
+   />
+   <link
+      rel="stylesheet"
+      href="/dist/assets/fonts/barlow.css"
+   />
+   <link
+      rel="stylesheet"
+      href="/dist/assets/fonts/roboto.css"
+   />
+   <script
+      type="module"
+      src="/dist/bundle.js"
+   ></script>
+</body>
+
+</html>
