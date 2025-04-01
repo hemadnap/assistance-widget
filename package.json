@@ -4,7 +4,6 @@
     "build": "npx rollup -c",
     "build:watch": "npx rollup -c --watch",
     "test": "echo \"No tests defined\" && exit 0"
-
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.26.10",
@@ -12,7 +11,6 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/rollup-darwin-arm64": "^4.38.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "html-loader": "^5.1.0",
