@@ -1,7 +1,7 @@
 # Assistance Widget
 
 ## Demo
-You can see the demo of the widget [here](/demo)
+You can see the demo of the widget [here](./demo)
 
 ## Components
 ### Feedback widget
