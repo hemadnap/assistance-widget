@@ -1,14 +1,28 @@
 # Assistance Widget
 
+## Demo
+You can see the demo of the widget [here](/demo)
 
 ## Components
 ### Feedback widget
 ```html
+<!-- Default -->
 <sdg-feedback-widget/>
+
+<!-- With parameters -->
+<sdg-feedback-widget
+  buttonId="e0f2b1d3-5f7e-4a6b-a0d1-3f2c5e7f8b9c"
+  minified="true"
+  rating="true"
+  text="true"
+  closed="false"
+  overlay-click="false"
+  listen-query="false"
 ```
 
 ### Pre-footer widget
 ```html
+<!-- Default -->
 <sdg-pre-footer-widget/>
 ```
 
@@ -16,7 +30,10 @@
 You can run the project locally using the following command:
 ```bash
 npm i
-npm run dev
+npm run build:watch
+
+# Run a local server to serve the files
+http-server
 ```
 
 
@@ -31,40 +48,35 @@ This will output "/dist/bundle.js" file that can be exported to any website.
 ## Embedding
 To embed the widget into your website, you need to include the following script in your HTML file:
 ```html
-<script src="<cdn url>/<bundled file name>.js"></script>
-```
+<!-- Include the bundle style -->
+<link rel="stylesheet" href="/dist/bundle.css">
 
-Then, you can use the widget by adding one of or all the following HTML code to your page:
-```html
-<!-- Feedback widget -->
-<sdg-feedback-widget/>
-
-<!-- Pre-footer widget -->
-<sdg-pre-footer-widget/>
+<!-- Include the bundle script -->
+<script src="/dist/bundle.js"></script>
 ```
 
 
-## Local back office
+<!--## Local back office
 http://localhost:8082/swagger-ui/index.html
 
- -> login
+ - login
 {
   "email": "admin@example.com",
   "password": "MTIzNA=="
 }
 
--> get token and set it to authorize
+- get token and set it to authorize-->
 
 
 
-### get button id
--> get services
+<!--### get button id
+- get services
 {
   "first": 0,
   "rows": 10
 }
 
---> get buttons
+- get buttons
 {
   "first": 0,
   "rows": 10,
@@ -77,4 +89,4 @@ http://localhost:8082/swagger-ui/index.html
   "rows": 100,
   "serviceId": "ae612fd4-c549-4d74-bb9c-09a4a01c2218",
   "globalFilter":"yyy"
-}
+}-->
