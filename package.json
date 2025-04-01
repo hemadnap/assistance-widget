@@ -2,7 +2,9 @@
   "scripts": {
     "dev": "nodemon server.js",
     "build": "npx rollup -c",
-    "build:watch": "npx rollup -c --watch"
+    "build:watch": "npx rollup -c --watch",
+    "test": "echo \"No tests defined\" && exit 0"
+
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.26.10",
