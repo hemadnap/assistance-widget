@@ -31,7 +31,7 @@ const locales = {
    }
 };
 
-class FeedbackWidget extends HTMLElement {
+class SDGFeedbackWidget extends HTMLElement {
    constructor () {
       super();
       this.attachShadow({ mode: 'open' });
@@ -54,6 +54,7 @@ class FeedbackWidget extends HTMLElement {
       this.loadTemplate()
          .then(() => {
             this.getParams();
+            this.getAttributes();
             this.addLanguageContent();
             this.listenCloseButton();
             this.listenToOverlay();
@@ -144,27 +145,58 @@ class FeedbackWidget extends HTMLElement {
       this.shadowRoot.innerHTML = template;
    }
 
+   getAttributes () {
+      // get attributes from the element 
+      const buttonId = this.getAttribute('button-id');
+      const isMinified = this.getAttribute('minified');
+      const isRating = this.getAttribute('rating');
+      const isText = this.getAttribute('text');
+      const isClosed = this.getAttribute('closed');
+      const isOverlayClose = this.getAttribute('overlay-click');
+
+console.log('buttonId', buttonId);
+      console.log('isMinified', isMinified);
+      console.log('isRating', isRating);
+      console.log('isText', isText);
+      console.log('isClosed', isClosed);
+      console.log('isOverlayClose', isOverlayClose);
+
+      // set attributes to the element
+      this.buttonId = buttonId || this.buttonId;
+      this.isMinified = isMinified === 'true' || this.isMinified;
+      this.isRating = isRating === 'true' || this.isRating;
+      this.isText = isText === 'true' || this.isText;
+      this.isClosed = isClosed === 'true' || this.isClosed;
+      this.isOverlayClose = isOverlayClose === 'true' || this.isOverlayClose;
+
+      // set attributes to the widget
+      // minimized
+      if (this.isMinified) {
+         this.shadowRoot.querySelector('#widget').classList.add('minimized');
+      }
+   }
+
    getParams () {
       /*
          Params:
-         - sdg-button-id=...           // button id (default: null)
-         - sdg-feed-min=0              // minimized feedback widget (default: 0)
-         - sdg-feed-rating=0           // rating display (default: 0)
-         - sdg-feed-text=0             // text display   (default: 0)
-         - sdg-feed-open=0             // open feedback widget (default: 0)
-         - sdg-feed-overlay-click=0    // close feedback widget via overlay click (default: 0)
+         - sdg-fw-id=...           // button id (default: null)
+         - sdg-fw-min=0              // minimized feedback widget (default: 0)
+         - sdg-fw-rating=0           // rating display (default: 0)
+         - sdg-fw-text=0             // text display   (default: 0)
+         - sdg-fw-open=0             // open feedback widget (default: 0)
+         - sdg-fw-overlay-click=0    // close feedback widget via overlay click (default: 0)
 
          example:
-         http://localhost:3000/feedback-widget?sdg-feed-min=0&sdg-feed-rating=1&sdg-feed-text=1&sdg-feed-open=1&sdg-feed-overlay-click=0&sdg-button-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
+         /demo/feedback-widget.html?sdg-fw-min=0&sdg-fw-rating=1&sdg-fw-text=1&sdg-fw-open=1&sdg-fw-overlay-click=0&sdg-fw-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
       */
       const urlParams = new URLSearchParams(window.location.search);
 
-      this.buttonId = urlParams.has('sdg-button-id') ? urlParams.get('sdg-button-id') : this.buttonId;
-      this.isMinified = urlParams.has('sdg-feed-min') && urlParams.get('sdg-feed-min') === '1';
-      this.isRating = urlParams.has('sdg-feed-rating') && urlParams.get('sdg-feed-rating') === '1';
-      this.isText = urlParams.has('sdg-feed-text') && urlParams.get('sdg-feed-text') === '1';
-      this.isClosed = !urlParams.has('sdg-feed-open') || urlParams.get('sdg-feed-open') === '0';
-      this.isOverlayClose = urlParams.has('sdg-feed-overlay-click') && urlParams.get('sdg-feed-overlay-click') === '1';
+      this.buttonId = urlParams.has('sdg-fw-id') ? urlParams.get('sdg-fw-id') : this.buttonId;
+      this.isMinified = urlParams.has('sdg-fw-min') && urlParams.get('sdg-fw-min') === '1';
+      this.isRating = urlParams.has('sdg-fw-rating') && urlParams.get('sdg-fw-rating') === '1';
+      this.isText = urlParams.has('sdg-fw-text') && urlParams.get('sdg-fw-text') === '1';
+      this.isClosed = !urlParams.has('sdg-fw-open') || urlParams.get('sdg-fw-open') === '0';
+      this.isOverlayClose = urlParams.has('sdg-fw-overlay-click') && urlParams.get('sdg-fw-overlay-click') === '1';
 
       // add class to the widget
       // minized
@@ -308,4 +340,4 @@ class FeedbackWidget extends HTMLElement {
 }
 
 // Define the custom element
-customElements.define('feedback-widget', FeedbackWidget);
+customElements.define('sdg-feedback-widget', SDGFeedbackWidget);

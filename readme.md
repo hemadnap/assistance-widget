@@ -4,12 +4,12 @@
 ## Components
 ### Feedback widget
 ```html
-<feedback-widget/>
+<sdg-feedback-widget/>
 ```
 
-### Pre-footer
+### Pre-footer widget
 ```html
-<pre-footer/>
+<sdg-pre-footer-widget/>
 ```
 
 ## Local usage
@@ -37,10 +37,10 @@ To embed the widget into your website, you need to include the following script 
 Then, you can use the widget by adding one of or all the following HTML code to your page:
 ```html
 <!-- Feedback widget -->
-<feedback-widget/>
+<sdg-feedback-widget/>
 
-<!-- Pre-footer -->
-<pre-footer/>
+<!-- Pre-footer widget -->
+<sdg-pre-footer-widget/>
 ```
 
 
