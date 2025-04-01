@@ -521,7 +521,7 @@
   var regeneratorExports = requireRegenerator();
   var _regeneratorRuntime = /*@__PURE__*/getDefaultExportFromCjs(regeneratorExports);
 
-  var template = "<div id=\"widget\" class=\"widget\">\n   <!-- Closed feedback widget -->\n   <div id=\"open\" class=\"minimized-feedback\">\n      Feedback widget\n   </div>\n\n   <!-- Open feedback widget -->\n   <div class=\"feedback-widget\">\n      <!-- Header -->\n      <header>\n         <div id=\"title\" class=\"title\"></div>\n\n         <a id=\"close\" class=\"close\">\n            <img src=\"/src/assets/icons/close.svg\" alt=\"Close\">\n         </a>\n      </header>\n\n      <main>\n         <div class=\"form\">\n            <!-- Rating -->\n            <div class=\"rating\">\n               <div id=\"rating-label\" class=\"label\"></div>\n               <input type=\"text\" id=\"rating-value\" hidden>\n               <div class=\"rates\">\n                  <a id=\"rate-1\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">1</span>\n                  </a>\n                  <a id=\"rate-2\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">2</span>\n                  </a>\n                  <a id=\"rate-3\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">3</span>\n                  </a>\n                  <a id=\"rate-4\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">4</span>\n                  </a>\n                  <a id=\"rate-5\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">5</span>\n                  </a>\n               </div>\n            </div>\n\n            <!-- Text -->\n            <div class=\"text\">\n               <div id=\"text-label\" class=\"label\"></div>\n               <div id=\"text-component\" class=\"text-component\">\n                  <textarea id=\"text-value\"></textarea>\n                  <div id=\"text-info\" class=\"text-info\"></div>\n               </div>\n            </div>\n\n            <!-- Submit -->\n            <button id=\"submit\" disabled=\"disabled\"></button>\n         </div>\n\n         <!-- Submitted message -->\n         <div id=\"submitted-message\" class=\"submitted-message\"></div>\n      </main>\n   </div>\n\n   <!-- Overlay -->\n   <div id=\"overlay\" class=\"overlay\"></div>\n</div>\n\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n      --color-overlay: #bfc0c6;\n      --color-error: #d4003c;\n   }\n\n   .widget {\n      z-index: 1000;\n\n      .overlay {\n         display: flex;\n         position: fixed;\n         top: 0;\n         left: 0;\n         width: 100%;\n         height: 100%;\n         background: #0203067A;\n         ;\n         z-index: 999;\n      }\n\n      .minimized-feedback {\n         display: none;\n         justify-content: center;\n         align-items: center;\n         cursor: pointer;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         padding: 5px 10px;\n         background: #6EC8F2;\n         border: 2px solid #006F9E !important;\n         border-top-right-radius: 8px;\n         border-top-left-radius: 8px;\n         font-family: \"Barlow\", sans-serif;\n         font-size: 18px;\n         line-height: 28px;\n         font-weight: 400;\n         vertical-align: middle;\n         cursor: pointer;\n         z-index: 1000;\n         transition: .1s;\n\n         &:hover {\n            background: #DAF2FC;\n         }\n      }\n\n      .feedback-widget {\n         display: flex;\n         flex-direction: column;\n         align-items: center;\n         justify-content: center;\n         gap: 10px;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         width: 400px;\n         background: #FFFFFF;\n         padding: 10px;\n         box-shadow: 0px 4px 16px #0C0F1E1A;\n         border-top-left-radius: 16px;\n         border-top-right-radius: 16px;\n         color: #2B2D42;\n         padding: 16px;\n         z-index: 1000;\n\n         &.closed {\n            display: none;\n         }\n\n\n         /* Header */\n         header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            width: 100%;\n\n            .title {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 22px;\n               line-height: 28px;\n               font-weight: 600;\n               vertical-align: middle;\n               width: 100%;\n            }\n\n            .close {\n               display: flex;\n               justify-content: center;\n               align-items: center;\n               cursor: pointer;\n               transition: .1s;\n               padding: 3px;\n               border-radius: 4px;\n\n               &:hover {\n                  background: #F5F5F5;\n               }\n            }\n         }\n\n\n         /* Main */\n         main,\n         .form {\n            display: flex;\n            flex-direction: column;\n            gap: 10px;\n            width: 100%;\n\n            .label {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 24px;\n               font-weight: 700;\n               width: 100%;\n            }\n\n            /* Rating */\n            .rating {\n               display: flex;\n               flex-direction: column;\n               align-items: start;\n               gap: 20px;\n               margin: 10px 0;\n               width: 100%;\n\n               .rates {\n                  display: flex;\n                  gap: 8px;\n                  width: 100%;\n\n                  .rate {\n                     display: flex;\n                     flex-direction: column;\n                     align-items: center;\n                     gap: 5px;\n                     cursor: pointer;\n                     position: relative;\n                     width: 40px;\n                     height: 40px;\n\n                     * {\n                        position: absolute;\n                     }\n\n                     .value {\n                        font-family: \"Barlow\", sans-serif;\n                        font-size: 14px;\n                        line-height: 28px;\n                        font-weight: 600;\n                        padding-top: 8px;\n                     }\n\n                     img {\n                        content: url('/src/assets/icons/star.svg');\n                        background-size: cover;\n                        width: 40px;\n                     }\n\n                     &:hover img {\n                        content: url('/src/assets/icons/star-hover.svg');\n                     }\n\n                     &.active img {\n                        content: url('/src/assets/icons/star-active.svg');\n                     }\n                  }\n               }\n            }\n\n            /* Text */\n            .text {\n               display: flex;\n               flex-direction: column;\n               align-items: start;\n               gap: 10px;\n               width: 100%;\n\n               .text-component {\n                  display: flex;\n                  flex-direction: column;\n                  align-items: start;\n                  gap: 2px;\n                  width: 100%;\n\n                  textarea {\n                     height: 100px;\n                     border: 2px solid #6D6E83;\n                     border-radius: 4px;\n                     width: 100%;\n                     max-width: calc(100% - 5px);\n                     resize: vertical;\n                     outline: none;\n                  }\n\n                  .text-info {\n                     font-family: \"Barlow\", sans-serif;\n                     font-size: 14px;\n                     line-height: 24px;\n                     font-weight: 400;\n                     color: #6D6E83;\n                  }\n\n                  &.error {\n                     textarea {\n                        border: 2px solid #d4003c;\n                     }\n\n                     .text-info {\n                        color: #d4003c;\n                     }\n                  }\n               }\n            }\n\n            /* Submit */\n            button {\n               width: 100%;\n               height: 48px;\n               padding: 10px 20px;\n               background: #6EC8F2;\n               border: 2px solid #006F9E !important;\n               color: #2B2D42;\n               border: none;\n               border-radius: 8px;\n               cursor: pointer;\n               margin-top: 30px;\n               transition: .1s;\n               font-family: \"Roboto\", sans-serif;\n               font-size: 16px;\n               line-height: 24px;\n               font-weight: 600;\n\n               &:hover {\n                  background: #DAF2FC;\n               }\n\n               &:disabled {\n                  opacity: .6;\n                  cursor: inherit;\n\n                  &:hover {\n                     background: #6EC8F2;\n                  }\n\n               }\n            }\n\n            .submitted-message {\n               display: none;\n               justify-content: center;\n               align-items: center;\n               gap: 10px;\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 28px;\n               font-weight: 400;\n               color: #2B2D42;\n               padding: 50px 0;\n            }\n         }\n      }\n   }\n\n   /* Minimized widget */\n   .widget.minimized {\n      .overlay {\n         display: none;\n      }\n\n      .minimized-feedback {\n         display: flex;\n      }\n\n      .feedback-widget {\n         display: none;\n      }\n   }\n\n   /* Closed widget */\n   .widget.closed {\n      .overlay {\n         display: none;\n      }\n\n      .minimized-feedback {\n         display: none;\n      }\n\n      .feedback-widget {\n         display: none;\n      }\n   }\n\n   /* Sumbit content */\n   .submitted main {\n      .form {\n         display: none;\n      }\n\n      .submitted-message {\n         display: flex;\n         flex-direction: column;\n         align-items: center;\n         gap: 10px;\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .feedback-widget {\n         width: calc(100% - 35px);\n         right: 0;\n      }\n   }\n</style>";
+  var template$1 = "<div id=\"widget\" class=\"widget\">\n   <!-- Closed feedback widget -->\n   <div id=\"open\" class=\"minimized-feedback\">\n      Feedback widget\n   </div>\n\n   <!-- Open feedback widget -->\n   <div class=\"feedback-widget\">\n      <!-- Header -->\n      <header>\n         <div id=\"title\" class=\"title\"></div>\n\n         <a id=\"close\" class=\"close\">\n            <img src=\"/src/assets/icons/close.svg\" alt=\"Close\">\n         </a>\n      </header>\n\n      <main>\n         <div class=\"form\">\n            <!-- Rating -->\n            <div class=\"rating\">\n               <div id=\"rating-label\" class=\"label\"></div>\n               <input type=\"text\" id=\"rating-value\" hidden>\n               <div class=\"rates\">\n                  <a id=\"rate-1\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">1</span>\n                  </a>\n                  <a id=\"rate-2\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">2</span>\n                  </a>\n                  <a id=\"rate-3\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">3</span>\n                  </a>\n                  <a id=\"rate-4\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">4</span>\n                  </a>\n                  <a id=\"rate-5\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">5</span>\n                  </a>\n               </div>\n            </div>\n\n            <!-- Text -->\n            <div class=\"text\">\n               <div id=\"text-label\" class=\"label\"></div>\n               <div id=\"text-component\" class=\"text-component\">\n                  <textarea id=\"text-value\"></textarea>\n                  <div id=\"text-info\" class=\"text-info\"></div>\n               </div>\n            </div>\n\n            <!-- Submit -->\n            <button id=\"submit\" disabled=\"disabled\"></button>\n         </div>\n\n         <!-- Submitted message -->\n         <div id=\"submitted-message\" class=\"submitted-message\"></div>\n      </main>\n   </div>\n\n   <!-- Overlay -->\n   <div id=\"overlay\" class=\"overlay\"></div>\n</div>\n\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n      --color-overlay: #bfc0c6;\n      --color-error: #d4003c;\n   }\n\n   .widget {\n      z-index: 1000;\n\n      .overlay {\n         display: flex;\n         position: fixed;\n         top: 0;\n         left: 0;\n         width: 100%;\n         height: 100%;\n         background: #0203067A;\n         ;\n         z-index: 999;\n      }\n\n      .minimized-feedback {\n         display: none;\n         justify-content: center;\n         align-items: center;\n         cursor: pointer;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         padding: 5px 10px;\n         background: #6EC8F2;\n         border: 2px solid #006F9E !important;\n         border-top-right-radius: 8px;\n         border-top-left-radius: 8px;\n         font-family: \"Barlow\", sans-serif;\n         font-size: 18px;\n         line-height: 28px;\n         font-weight: 400;\n         vertical-align: middle;\n         cursor: pointer;\n         z-index: 1000;\n         transition: .1s;\n\n         &:hover {\n            background: #DAF2FC;\n         }\n      }\n\n      .feedback-widget {\n         display: flex;\n         flex-direction: column;\n         align-items: center;\n         justify-content: center;\n         gap: 10px;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         width: 400px;\n         background: #FFFFFF;\n         padding: 10px;\n         box-shadow: 0px 4px 16px #0C0F1E1A;\n         border-top-left-radius: 16px;\n         border-top-right-radius: 16px;\n         color: #2B2D42;\n         padding: 16px;\n         z-index: 1000;\n\n         &.closed {\n            display: none;\n         }\n\n\n         /* Header */\n         header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            width: 100%;\n\n            .title {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 22px;\n               line-height: 28px;\n               font-weight: 600;\n               vertical-align: middle;\n               width: 100%;\n            }\n\n            .close {\n               display: flex;\n               justify-content: center;\n               align-items: center;\n               cursor: pointer;\n               transition: .1s;\n               padding: 3px;\n               border-radius: 4px;\n\n               &:hover {\n                  background: #F5F5F5;\n               }\n            }\n         }\n\n\n         /* Main */\n         main,\n         .form {\n            display: flex;\n            flex-direction: column;\n            gap: 10px;\n            width: 100%;\n\n            .label {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 24px;\n               font-weight: 700;\n               width: 100%;\n            }\n\n            /* Rating */\n            .rating {\n               display: flex;\n               flex-direction: column;\n               align-items: start;\n               gap: 20px;\n               margin: 10px 0;\n               width: 100%;\n\n               .rates {\n                  display: flex;\n                  gap: 8px;\n                  width: 100%;\n\n                  .rate {\n                     display: flex;\n                     flex-direction: column;\n                     align-items: center;\n                     gap: 5px;\n                     cursor: pointer;\n                     position: relative;\n                     width: 40px;\n                     height: 40px;\n\n                     * {\n                        position: absolute;\n                     }\n\n                     .value {\n                        font-family: \"Barlow\", sans-serif;\n                        font-size: 14px;\n                        line-height: 28px;\n                        font-weight: 600;\n                        padding-top: 8px;\n                     }\n\n                     img {\n                        content: url('/src/assets/icons/star.svg');\n                        background-size: cover;\n                        width: 40px;\n                     }\n\n                     &:hover img {\n                        content: url('/src/assets/icons/star-hover.svg');\n                     }\n\n                     &.active img {\n                        content: url('/src/assets/icons/star-active.svg');\n                     }\n                  }\n               }\n            }\n\n            /* Text */\n            .text {\n               display: flex;\n               flex-direction: column;\n               align-items: start;\n               gap: 10px;\n               width: 100%;\n\n               .text-component {\n                  display: flex;\n                  flex-direction: column;\n                  align-items: start;\n                  gap: 2px;\n                  width: 100%;\n\n                  textarea {\n                     height: 100px;\n                     border: 2px solid #6D6E83;\n                     border-radius: 4px;\n                     width: 100%;\n                     max-width: calc(100% - 5px);\n                     resize: vertical;\n                     outline: none;\n                  }\n\n                  .text-info {\n                     font-family: \"Barlow\", sans-serif;\n                     font-size: 14px;\n                     line-height: 24px;\n                     font-weight: 400;\n                     color: #6D6E83;\n                  }\n\n                  &.error {\n                     textarea {\n                        border: 2px solid #d4003c;\n                     }\n\n                     .text-info {\n                        color: #d4003c;\n                     }\n                  }\n               }\n            }\n\n            /* Submit */\n            button {\n               width: 100%;\n               height: 48px;\n               padding: 10px 20px;\n               background: #6EC8F2;\n               border: 2px solid #006F9E !important;\n               color: #2B2D42;\n               border: none;\n               border-radius: 8px;\n               cursor: pointer;\n               margin-top: 30px;\n               transition: .1s;\n               font-family: \"Roboto\", sans-serif;\n               font-size: 16px;\n               line-height: 24px;\n               font-weight: 600;\n\n               &:hover {\n                  background: #DAF2FC;\n               }\n\n               &:disabled {\n                  opacity: .6;\n                  cursor: inherit;\n\n                  &:hover {\n                     background: #6EC8F2;\n                  }\n\n               }\n            }\n\n            .submitted-message {\n               display: none;\n               justify-content: center;\n               align-items: center;\n               gap: 10px;\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 28px;\n               font-weight: 400;\n               color: #2B2D42;\n               padding: 50px 0;\n            }\n         }\n      }\n   }\n\n   /* Minimized widget */\n   .widget.minimized {\n      .overlay {\n         display: none;\n      }\n\n      .minimized-feedback {\n         display: flex;\n      }\n\n      .feedback-widget {\n         display: none;\n      }\n   }\n\n   /* Closed widget */\n   .widget.closed {\n      .overlay {\n         display: none;\n      }\n\n      .minimized-feedback {\n         display: none;\n      }\n\n      .feedback-widget {\n         display: none;\n      }\n   }\n\n   /* Sumbit content */\n   .submitted main {\n      .form {\n         display: none;\n      }\n\n      .submitted-message {\n         display: flex;\n         flex-direction: column;\n         align-items: center;\n         gap: 10px;\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .feedback-widget {\n         width: calc(100% - 35px);\n         right: 0;\n      }\n   }\n</style>";
 
   function _callSuper$1(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct$1() ? Reflect.construct(o, [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
   function _isNativeReflectConstruct$1() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct$1 = function _isNativeReflectConstruct() { return !!t; })(); }
@@ -555,11 +555,11 @@
       submitted: 'Vielen Dank für Ihr Feedback!'
     }
   };
-  var FeedbackWidget = /*#__PURE__*/function (_HTMLElement) {
-    function FeedbackWidget() {
+  var SDGFeedbackWidget = /*#__PURE__*/function (_HTMLElement) {
+    function SDGFeedbackWidget() {
       var _this;
-      _classCallCheck(this, FeedbackWidget);
-      _this = _callSuper$1(this, FeedbackWidget);
+      _classCallCheck(this, SDGFeedbackWidget);
+      _this = _callSuper$1(this, SDGFeedbackWidget);
       _this.attachShadow({
         mode: 'open'
       });
@@ -578,6 +578,7 @@
       _this.feedbackUrl = 'http://localhost:8082/api/public/feedbacks';
       _this.loadTemplate().then(function () {
         _this.getParams();
+        _this.getAttributes();
         _this.addLanguageContent();
         _this.listenCloseButton();
         _this.listenToOverlay();
@@ -588,8 +589,8 @@
       });
       return _this;
     }
-    _inherits(FeedbackWidget, _HTMLElement);
-    return _createClass(FeedbackWidget, [{
+    _inherits(SDGFeedbackWidget, _HTMLElement);
+    return _createClass(SDGFeedbackWidget, [{
       key: "rating",
       get: function get() {
         return this._rating;
@@ -672,7 +673,7 @@
           return _regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) switch (_context.prev = _context.next) {
               case 0:
-                this.shadowRoot.innerHTML = template;
+                this.shadowRoot.innerHTML = template$1;
               case 1:
               case "end":
                 return _context.stop();
@@ -685,26 +686,57 @@
         return loadTemplate;
       }()
     }, {
+      key: "getAttributes",
+      value: function getAttributes() {
+        // get attributes from the element 
+        var buttonId = this.getAttribute('button-id');
+        var isMinified = this.getAttribute('minified');
+        var isRating = this.getAttribute('rating');
+        var isText = this.getAttribute('text');
+        var isClosed = this.getAttribute('closed');
+        var isOverlayClose = this.getAttribute('overlay-click');
+        console.log('buttonId', buttonId);
+        console.log('isMinified', isMinified);
+        console.log('isRating', isRating);
+        console.log('isText', isText);
+        console.log('isClosed', isClosed);
+        console.log('isOverlayClose', isOverlayClose);
+
+        // set attributes to the element
+        this.buttonId = buttonId || this.buttonId;
+        this.isMinified = isMinified === 'true' || this.isMinified;
+        this.isRating = isRating === 'true' || this.isRating;
+        this.isText = isText === 'true' || this.isText;
+        this.isClosed = isClosed === 'true' || this.isClosed;
+        this.isOverlayClose = isOverlayClose === 'true' || this.isOverlayClose;
+
+        // set attributes to the widget
+        // minimized
+        if (this.isMinified) {
+          this.shadowRoot.querySelector('#widget').classList.add('minimized');
+        }
+      }
+    }, {
       key: "getParams",
       value: function getParams() {
         /*
            Params:
-           - sdg-button-id=...           // button id (default: null)
-           - sdg-feed-min=0              // minimized feedback widget (default: 0)
-           - sdg-feed-rating=0           // rating display (default: 0)
-           - sdg-feed-text=0             // text display   (default: 0)
-           - sdg-feed-open=0             // open feedback widget (default: 0)
-           - sdg-feed-overlay-click=0    // close feedback widget via overlay click (default: 0)
+           - sdg-fw-id=...           // button id (default: null)
+           - sdg-fw-min=0              // minimized feedback widget (default: 0)
+           - sdg-fw-rating=0           // rating display (default: 0)
+           - sdg-fw-text=0             // text display   (default: 0)
+           - sdg-fw-open=0             // open feedback widget (default: 0)
+           - sdg-fw-overlay-click=0    // close feedback widget via overlay click (default: 0)
             example:
-           http://localhost:3000/feedback-widget?sdg-feed-min=0&sdg-feed-rating=1&sdg-feed-text=1&sdg-feed-open=1&sdg-feed-overlay-click=0&sdg-button-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
+           /demo/feedback-widget.html?sdg-fw-min=0&sdg-fw-rating=1&sdg-fw-text=1&sdg-fw-open=1&sdg-fw-overlay-click=0&sdg-fw-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
         */
         var urlParams = new URLSearchParams(window.location.search);
-        this.buttonId = urlParams.has('sdg-button-id') ? urlParams.get('sdg-button-id') : this.buttonId;
-        this.isMinified = urlParams.has('sdg-feed-min') && urlParams.get('sdg-feed-min') === '1';
-        this.isRating = urlParams.has('sdg-feed-rating') && urlParams.get('sdg-feed-rating') === '1';
-        this.isText = urlParams.has('sdg-feed-text') && urlParams.get('sdg-feed-text') === '1';
-        this.isClosed = !urlParams.has('sdg-feed-open') || urlParams.get('sdg-feed-open') === '0';
-        this.isOverlayClose = urlParams.has('sdg-feed-overlay-click') && urlParams.get('sdg-feed-overlay-click') === '1';
+        this.buttonId = urlParams.has('sdg-fw-id') ? urlParams.get('sdg-fw-id') : this.buttonId;
+        this.isMinified = urlParams.has('sdg-fw-min') && urlParams.get('sdg-fw-min') === '1';
+        this.isRating = urlParams.has('sdg-fw-rating') && urlParams.get('sdg-fw-rating') === '1';
+        this.isText = urlParams.has('sdg-fw-text') && urlParams.get('sdg-fw-text') === '1';
+        this.isClosed = !urlParams.has('sdg-fw-open') || urlParams.get('sdg-fw-open') === '0';
+        this.isOverlayClose = urlParams.has('sdg-fw-overlay-click') && urlParams.get('sdg-fw-overlay-click') === '1';
 
         // add class to the widget
         // minized
@@ -858,7 +890,9 @@
       }
     }]);
   }(/*#__PURE__*/_wrapNativeSuper(HTMLElement)); // Define the custom element
-  customElements.define('feedback-widget', FeedbackWidget);
+  customElements.define('sdg-feedback-widget', SDGFeedbackWidget);
+
+  var template = "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap\" rel=\"stylesheet\">\n\n<div class=\"pre-footer-widget\">\n\n   <header>\n      <div id=\"header-title\" class=\"title\"></div>\n   </header>\n\n   <main>\n      <div class=\"button-list\">\n         <!-- Chat -->\n         <div id=\"chat-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/conversation.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Phone -->\n         <div id=\"phone-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/phone.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Contact -->\n         <div id=\"contact-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/message.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Appointlent -->\n         <div id=\"appointment-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/calendar.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Office -->\n         <div id=\"office-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/location.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n      </div>\n\n      <div id=\"info\" class=\"info\"></div>\n   </main>\n</div>\n\n<style scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n   }\n\n   .pre-footer-widget {\n      display: flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: flex-start;\n      gap: 32px;\n      width: 100%;\n      padding: 50px 120px;\n   }\n\n   /* Header */\n   header {\n      display: flex;\n      flex-direction: row;\n      align-items: center;\n      justify-content: flex-start;\n      gap: 10px;\n      width: 100%;\n   }\n\n   header .title {\n      font-family: 'Barlow', sans-serif;\n      font-weight: 600;\n      font-size: 32px;\n      line-height: 40px;\n      color: #2B2D42;\n   }\n\n   /* main */\n   main {\n      display: flex;\n      flex-direction: column;\n      gap: 24px;\n      background-color: var(--color-light-gray);\n      border-radius: 10px;\n      box-shadow: 0 0 10px var(--color-shadow);\n   }\n\n   /* Assistance button */\n   .assistance-button {\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      padding: 10px 24px;\n      background: white;\n      border: 2px solid #006F9E;\n      border-radius: 8px;\n      cursor: pointer;\n      width: 279px;\n      height: 80px;\n      transition: .1s;\n   }\n\n   .assistance-button:hover {\n      background-color: #DAF2FC;\n   }\n\n   .assistance-button:active {\n      background-color: #B6E8FF;\n   }\n\n    .button-list {\n      display: flex;\n      flex-direction: row;\n      flex-wrap: wrap;\n      gap: 24px;\n   }\n\n   .assistance-button .left {\n      display: flex;\n      align-items: start;\n      justify-content: center;\n      gap: 12px;\n      padding: 10px 0;\n   }\n\n   .assistance-button .left .icon {\n      padding: 5px 0;\n   }\n\n   .assistance-button .left .icon img {\n      width: 28px;\n      height: 28px;\n   }\n\n   .assistance-button .left .content {\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: flex-start;\n      padding: 10px 0;\n      gap: 5px;\n   }\n\n   .assistance-button .left .content .title {\n      font-family: 'Barlow', sans-serif;\n      font-weight: 700;\n      font-size: 18px;\n      line-height: 24px;\n      color: var(--color-dark-blue);\n   }\n\n   .assistance-button .left .content .description {\n      font-family: \"Roboto\", sans-serif;\n      font-size: 14px;\n      line-height: 20px;\n      font-weight: 400;\n      color: var(--color-gray);\n   }\n\n   .assistance-button .right {\n      display: flex;\n      align-items: center;\n      justify-content: center;\n   }\n\n   .assistance-button .right img {\n      width: 16px;\n      height: 16px;\n   }\n\n\n   /* Info */\n   .info {\n      font-family: \"Roboto\", sans-serif;\n      font-weight: 400;\n      font-size: 16px;\n      line-height: 22px;\n      color: #474A5E;\n   }\n\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .pre-footer-widget {}\n   }\n</style>";
 
   function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
   function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
@@ -968,89 +1002,39 @@
       info: 'Unsere Kollegen von FOD BOSA sind an Wochentagen von 8:30 bis 12:30 Uhr und von 13:30 bis 16:00 Uhr erreichbar.'
     }
   };
-  var PreFooterWidget = /*#__PURE__*/function (_HTMLElement) {
-    function PreFooterWidget() {
+  var SDGPreFooterWidget = /*#__PURE__*/function (_HTMLElement) {
+    function SDGPreFooterWidget() {
       var _this;
-      _classCallCheck(this, PreFooterWidget);
-      _this = _callSuper(this, PreFooterWidget);
+      _classCallCheck(this, SDGPreFooterWidget);
+      _this = _callSuper(this, SDGPreFooterWidget);
       _this.attachShadow({
         mode: 'open'
       });
-      _this._rating = 0;
-      _this._text = '';
-      _this._isSubmittable = false;
+      _this.isChat = 0;
+      _this.isPhone = 0;
+      _this.phoneNumber = null;
+      _this.isContact = 0;
+      _this.contactForm = null;
+      _this.isAppointment = 0;
+      _this.appointmentUrl = null;
+      _this.text = null;
       _this.loadTemplate().then(function () {
+        _this.getParams();
         _this.addLanguageContent();
         _this.listenChatButton();
-        //this.listenRating();
-        //this.listenTextfield();
-        //this.listenSubmit();
       });
       return _this;
     }
-    _inherits(PreFooterWidget, _HTMLElement);
-    return _createClass(PreFooterWidget, [{
-      key: "rating",
-      get: function get() {
-        return this._rating;
-      },
-      set: function set(value) {
-        var _this$_text;
-        this._rating = value;
-        if (((_this$_text = this._text) === null || _this$_text === void 0 ? void 0 : _this$_text.length) > 0 && this._rating) {
-          this.isSubmittable = true;
-        } else {
-          this.isSubmittable = false;
-        }
-      }
-    }, {
-      key: "text",
-      get: function get() {
-        return this._text;
-      },
-      set: function set(value) {
-        var _this$_text2;
-        this._text = value;
-        if (((_this$_text2 = this._text) === null || _this$_text2 === void 0 ? void 0 : _this$_text2.length) > 0 && this._rating) {
-          this.isSubmittable = true;
-        } else {
-          this.isSubmittable = false;
-        }
-      }
-    }, {
-      key: "isSubmittable",
-      get: function get() {
-        return this._isSubmittable;
-      },
-      set: function set(value) {
-        this._isSubmittable = value;
-
-        // disable or enable the submit button
-        var submit = this.shadowRoot.querySelector('#submit');
-        if (value) {
-          submit.removeAttribute('disabled');
-        } else {
-          submit.setAttribute('disabled', true);
-        }
-      }
-    }, {
+    _inherits(SDGPreFooterWidget, _HTMLElement);
+    return _createClass(SDGPreFooterWidget, [{
       key: "loadTemplate",
       value: function () {
         var _loadTemplate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
-          var response, html;
           return _regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return fetch('/src/elements/pre-footer/pre-footer.html');
-              case 2:
-                response = _context.sent;
-                _context.next = 5;
-                return response.text();
-              case 5:
-                html = _context.sent;
-                this.shadowRoot.innerHTML = "".concat(html);
-              case 7:
+                this.shadowRoot.innerHTML = template;
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -1061,6 +1045,38 @@
         }
         return loadTemplate;
       }()
+    }, {
+      key: "getParams",
+      value: function getParams() {
+        /*
+           Params:
+           - sdg-pf-chat=0              // display chat button (default: 0)
+           - sdg-pf-phone=0             // display phone button (default: 0)
+           - sdg-pf-phone-number=...    // phone number (default: null)
+           - sdg-pf-contact=0           // display contact button (default: 0)
+           - sdg-pf-contact-url=...      // contact form url (default: null)
+           - sdg-pf-appointment=0       // display appointment button (default: 0)
+           - sdg-pf-appointment-url=... // appointment url (default: null)
+           - sdg-pf-text                // display text (default: 0)
+            example:
+           /demo/pre-footer-widget.html?sdg-feed-min=0&sdg-feed-rating=1&sdg-feed-text=1&sdg-feed-open=1&sdg-feed-overlay-click=0&sdg-button-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
+        */
+        var urlParams = new URLSearchParams(window.location.search);
+        this.isChat = urlParams.has('sdg-pf-chat') && urlParams.get('sdg-pf-chat') === '1';
+        this.isPhone = urlParams.has('sdg-pf-phone') && urlParams.get('sdg-pf-phone') === '1';
+        this.phoneNumber = urlParams.has('sdg-pf-phone-number') ? urlParams.get('sdg-pf-phone-number') : null;
+        this.isContact = urlParams.has('sdg-pf-contact') && urlParams.get('sdg-pf-contact') === '1';
+        this.contactForm = urlParams.has('sdg-pf-contact-url') ? urlParams.get('sdg-pf-contact-url') : null;
+        this.isAppointment = urlParams.has('sdg-pf-appointment') && urlParams.get('sdg-pf-appointment') === '1';
+        this.appointmentUrl = urlParams.has('sdg-pf-appointment-url') ? urlParams.get('sdg-pf-appointment-url') : null;
+        this.text = urlParams.has('sdg-pf-text') ? urlParams.get('sdg-pf-text') : null;
+
+        // add class to the widget
+        // minized
+        if (this.isMinified) {
+          this.shadowRoot.querySelector('#widget').classList.add('minimized');
+        }
+      }
     }, {
       key: "addLanguageContent",
       value: function addLanguageContent() {
@@ -1111,7 +1127,7 @@
               closedClass.classList.remove('closed');
             }
             // open the feedback widget
-            feedbackWidget.open();
+            // feedbackWidget.open();
           } else {
             console.error('Feedback widget not found');
           }
@@ -1151,6 +1167,6 @@
       }
     }]);
   }(/*#__PURE__*/_wrapNativeSuper(HTMLElement)); // Define the custom element
-  customElements.define('pre-footer-widget', PreFooterWidget);
+  customElements.define('sdg-pre-footer-widget', SDGPreFooterWidget);
 
 })();
