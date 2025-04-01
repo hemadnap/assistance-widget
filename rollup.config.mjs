@@ -51,7 +51,7 @@ export default {
         copy({
             targets: [
                 // Need to copy the files over for usage
-                { src: "src/assets", dest: "dist/assets" },
+                { src: "src/assets", dest: "dist" },
             ],
         }), 
         postcss({
