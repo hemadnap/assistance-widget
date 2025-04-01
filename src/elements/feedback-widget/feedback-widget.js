@@ -53,7 +53,6 @@ class SDGFeedbackWidget extends HTMLElement {
 
       this.loadTemplate()
          .then(() => {
-            this.getParams();
             this.getAttributes();
             this.addLanguageContent();
             this.listenCloseButton();
@@ -153,8 +152,9 @@ class SDGFeedbackWidget extends HTMLElement {
       const isText = this.getAttribute('text');
       const isClosed = this.getAttribute('closed');
       const isOverlayClose = this.getAttribute('overlay-click');
+      const isListeningQuery = this.getAttribute('listening-query');
 
-console.log('buttonId', buttonId);
+      console.log('buttonId', buttonId);
       console.log('isMinified', isMinified);
       console.log('isRating', isRating);
       console.log('isText', isText);
@@ -168,23 +168,29 @@ console.log('buttonId', buttonId);
       this.isText = isText === 'true' || this.isText;
       this.isClosed = isClosed === 'true' || this.isClosed;
       this.isOverlayClose = isOverlayClose === 'true' || this.isOverlayClose;
+      this.isListeningQuery = isListeningQuery === 'true' || this.isListeningQuery;
 
       // set attributes to the widget
       // minimized
       if (this.isMinified) {
          this.shadowRoot.querySelector('#widget').classList.add('minimized');
       }
+
+      // listening query
+      if (this.isListeningQuery) {
+         this.listenQuery();
+      }
    }
 
-   getParams () {
+   listenQuery () {
       /*
          Params:
-         - sdg-fw-id=...           // button id (default: null)
-         - sdg-fw-min=0              // minimized feedback widget (default: 0)
-         - sdg-fw-rating=0           // rating display (default: 0)
-         - sdg-fw-text=0             // text display   (default: 0)
-         - sdg-fw-open=0             // open feedback widget (default: 0)
-         - sdg-fw-overlay-click=0    // close feedback widget via overlay click (default: 0)
+         - sdg-fw-id=...            // button id (default: null)
+         - sdg-fw-min=0             // minimized feedback widget (default: 0)
+         - sdg-fw-rating=0          // rating display (default: 0)
+         - sdg-fw-text=0            // text display   (default: 0)
+         - sdg-fw-open=0            // open feedback widget (default: 0)
+         - sdg-fw-overlay-click=0   // close feedback widget via overlay click (default: 0)
 
          example:
          /demo/feedback-widget.html?sdg-fw-min=0&sdg-fw-rating=1&sdg-fw-text=1&sdg-fw-open=1&sdg-fw-overlay-click=0&sdg-fw-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
