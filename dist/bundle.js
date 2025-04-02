@@ -567,7 +567,7 @@
       _this.buttonId = null;
       _this.isRating = false;
       _this.isText = false;
-      _this.isMinified = false;
+      _this.isMinified = true;
       _this.isOverlayClose = true;
       _this._isSubmittable = false;
       _this._isSubmit = false;
@@ -666,6 +666,11 @@
         }
       }
     }, {
+      key: "open",
+      value: function open() {
+        this.isClosed = false;
+      }
+    }, {
       key: "loadTemplate",
       value: function () {
         var _loadTemplate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
@@ -693,7 +698,7 @@
         var isRating = this.getAttribute('rating');
         var isText = this.getAttribute('text');
         var isClosed = this.getAttribute('closed');
-        var isOverlayClose = this.getAttribute('overlay-click');
+        var isOverlayClose = this.getAttribute('overlay-close');
         var isListeningQuery = this.getAttribute('listening-query');
         console.log('buttonId', buttonId);
         console.log('isMinified', isMinified);
@@ -703,13 +708,13 @@
         console.log('isOverlayClose', isOverlayClose);
 
         // set attributes to the element
-        this.buttonId = buttonId || this.buttonId;
-        this.isMinified = isMinified === 'true' || this.isMinified;
-        this.isRating = isRating === 'true' || this.isRating;
-        this.isText = isText === 'true' || this.isText;
-        this.isClosed = isClosed === 'true' || this.isClosed;
-        this.isOverlayClose = isOverlayClose === 'true' || this.isOverlayClose;
-        this.isListeningQuery = isListeningQuery === 'true' || this.isListeningQuery;
+        this.buttonId = buttonId;
+        this.isMinified = isMinified === 'true' ? true : this.isMinified;
+        this.isRating = isRating === 'true' ? true : this.isRating;
+        this.isText = isText === 'true' ? true : this.isText;
+        this.isClosed = isClosed === 'true' ? true : this.isClosed;
+        this.isOverlayClose = isOverlayClose === 'true' ? true : this.isOverlayClose;
+        this.isListeningQuery = isListeningQuery === 'true' ? true : false;
 
         // set attributes to the widget
         // minimized
@@ -732,9 +737,9 @@
            - sdg-fw-rating=0          // rating display (default: 0)
            - sdg-fw-text=0            // text display   (default: 0)
            - sdg-fw-open=0            // open feedback widget (default: 0)
-           - sdg-fw-overlay-click=0   // close feedback widget via overlay click (default: 0)
+           - sdg-fw-overlay-close=0   // close feedback widget via overlay click (default: 0)
             example:
-           /demo/feedback-widget.html?sdg-fw-min=0&sdg-fw-rating=1&sdg-fw-text=1&sdg-fw-open=1&sdg-fw-overlay-click=0&sdg-fw-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
+           /demo/feedback-widget.html?sdg-fw-min=0&sdg-fw-rating=1&sdg-fw-text=1&sdg-fw-open=1&sdg-fw-overlay-close=0&sdg-fw-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
         */
         var urlParams = new URLSearchParams(window.location.search);
         this.buttonId = urlParams.has('sdg-fw-id') ? urlParams.get('sdg-fw-id') : this.buttonId;
@@ -742,7 +747,7 @@
         this.isRating = urlParams.has('sdg-fw-rating') && urlParams.get('sdg-fw-rating') === '1';
         this.isText = urlParams.has('sdg-fw-text') && urlParams.get('sdg-fw-text') === '1';
         this.isClosed = !urlParams.has('sdg-fw-open') || urlParams.get('sdg-fw-open') === '0';
-        this.isOverlayClose = urlParams.has('sdg-fw-overlay-click') && urlParams.get('sdg-fw-overlay-click') === '1';
+        this.isOverlayClose = urlParams.has('sdg-fw-overlay-close') && urlParams.get('sdg-fw-overlay-close') === '1';
 
         // add class to the widget
         // minized
@@ -898,7 +903,7 @@
   }(/*#__PURE__*/_wrapNativeSuper(HTMLElement)); // Define the custom element
   customElements.define('sdg-feedback-widget', SDGFeedbackWidget);
 
-  var template = "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap\" rel=\"stylesheet\">\n\n<div class=\"pre-footer-widget\">\n\n   <header>\n      <div id=\"header-title\" class=\"title\"></div>\n   </header>\n\n   <main>\n      <div class=\"button-list\">\n         <!-- Chat -->\n         <div id=\"chat-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/conversation.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Phone -->\n         <div id=\"phone-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/phone.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Contact -->\n         <div id=\"contact-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/message.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Appointlent -->\n         <div id=\"appointment-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/calendar.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Office -->\n         <div id=\"office-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/location.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n      </div>\n\n      <div id=\"info\" class=\"info\"></div>\n   </main>\n</div>\n\n<style scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n   }\n\n   .pre-footer-widget {\n      display: flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: flex-start;\n      gap: 32px;\n      width: 100%;\n      padding: 50px 120px;\n   }\n\n   /* Header */\n   header {\n      display: flex;\n      flex-direction: row;\n      align-items: center;\n      justify-content: flex-start;\n      gap: 10px;\n      width: 100%;\n   }\n\n   header .title {\n      font-family: 'Barlow', sans-serif;\n      font-weight: 600;\n      font-size: 32px;\n      line-height: 40px;\n      color: #2B2D42;\n   }\n\n   /* main */\n   main {\n      display: flex;\n      flex-direction: column;\n      gap: 24px;\n      background-color: var(--color-light-gray);\n      border-radius: 10px;\n      box-shadow: 0 0 10px var(--color-shadow);\n   }\n\n   /* Assistance button */\n   .assistance-button {\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      padding: 10px 24px;\n      background: white;\n      border: 2px solid #006F9E;\n      border-radius: 8px;\n      cursor: pointer;\n      width: 279px;\n      height: 80px;\n      transition: .1s;\n   }\n\n   .assistance-button:hover {\n      background-color: #DAF2FC;\n   }\n\n   .assistance-button:active {\n      background-color: #B6E8FF;\n   }\n\n    .button-list {\n      display: flex;\n      flex-direction: row;\n      flex-wrap: wrap;\n      gap: 24px;\n   }\n\n   .assistance-button .left {\n      display: flex;\n      align-items: start;\n      justify-content: center;\n      gap: 12px;\n      padding: 10px 0;\n   }\n\n   .assistance-button .left .icon {\n      padding: 5px 0;\n   }\n\n   .assistance-button .left .icon img {\n      width: 28px;\n      height: 28px;\n   }\n\n   .assistance-button .left .content {\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: flex-start;\n      padding: 10px 0;\n      gap: 5px;\n   }\n\n   .assistance-button .left .content .title {\n      font-family: 'Barlow', sans-serif;\n      font-weight: 700;\n      font-size: 18px;\n      line-height: 24px;\n      color: var(--color-dark-blue);\n   }\n\n   .assistance-button .left .content .description {\n      font-family: \"Roboto\", sans-serif;\n      font-size: 14px;\n      line-height: 20px;\n      font-weight: 400;\n      color: var(--color-gray);\n   }\n\n   .assistance-button .right {\n      display: flex;\n      align-items: center;\n      justify-content: center;\n   }\n\n   .assistance-button .right img {\n      width: 16px;\n      height: 16px;\n   }\n\n\n   /* Info */\n   .info {\n      font-family: \"Roboto\", sans-serif;\n      font-weight: 400;\n      font-size: 16px;\n      line-height: 22px;\n      color: #474A5E;\n   }\n\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .pre-footer-widget {}\n   }\n</style>";
+  var template = "<div id=\"widget\" class=\"pre-footer-widget\">\n\n   <header>\n      <div id=\"header-title\" class=\"title\"></div>\n   </header>\n\n   <main>\n      <div class=\"button-list\">\n         <!-- Chat -->\n         <div id=\"chat-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/conversation.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Phone -->\n         <div id=\"phone-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/phone.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Contact -->\n         <div id=\"contact-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/message.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Appointlent -->\n         <div id=\"appointment-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/calendar.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Office -->\n         <div id=\"office-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/location.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n      </div>\n\n      <div id=\"info-text\" class=\"info-text\"></div>\n   </main>\n</div>\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n   }\n\n   .pre-footer-widget {\n      display: flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: flex-start;\n      gap: 32px;\n      width: 100%;\n      padding: 50px 120px;\n\n      header {\n         display: flex;\n         flex-direction: row;\n         align-items: center;\n         justify-content: flex-start;\n         gap: 10px;\n         width: 100%;\n\n         .title {\n            font-family: 'Barlow', sans-serif;\n            font-weight: 600;\n            font-size: 32px;\n            line-height: 40px;\n            color: #2B2D42;\n         }\n      }\n\n      main {\n         display: flex;\n         flex-direction: column;\n         gap: 24px;\n         background-color: var(--color-light-gray);\n         border-radius: 10px;\n         box-shadow: 0 0 10px var(--color-shadow);\n\n         .button-list {\n            display: flex;\n            flex-direction: row;\n            flex-wrap: wrap;\n            gap: 24px;\n\n            .assistance-button {\n               display: none;\n               flex-direction: row;\n               justify-content: space-between;\n               padding: 10px 24px;\n               background: white;\n               border: 2px solid #006F9E;\n               border-radius: 8px;\n               cursor: pointer;\n               width: 279px;\n               height: 80px;\n               transition: .1s;\n\n               &:hover {\n                  background-color: #DAF2FC;\n               }\n\n               &:active {\n                  background-color: #B6E8FF;\n               }\n            }\n\n            .left {\n               display: flex;\n               align-items: start;\n               justify-content: center;\n               gap: 12px;\n               padding: 10px 0;\n\n               .icon {\n                  padding: 5px 0;\n\n                  img {\n                     width: 28px;\n                     height: 28px;\n                  }\n               }\n\n               .content {\n                  display: flex;\n                  flex-direction: column;\n                  justify-content: center;\n                  align-items: flex-start;\n                  padding: 10px 0;\n                  gap: 5px;\n\n                  .title {\n                     font-family: 'Barlow', sans-serif;\n                     font-weight: 700;\n                     font-size: 18px;\n                     line-height: 24px;\n                     color: var(--color-dark-blue);\n                  }\n\n                  .description {\n                     font-family: \"Roboto\", sans-serif;\n                     font-size: 14px;\n                     line-height: 20px;\n                     font-weight: 400;\n                     color: var(--color-gray);\n                  }\n               }\n            }\n\n            .right {\n               display: flex;\n               align-items: center;\n               justify-content: center;\n\n               img {\n                  width: 16px;\n                  height: 16px;\n               }\n            }\n         }\n\n         .info-text {\n            font-family: \"Roboto\", sans-serif;\n            font-weight: 400;\n            font-size: 16px;\n            line-height: 22px;\n            color: #474A5E;\n         }\n      }\n\n\n      &.is-chat {\n         #chat-button {\n            display: flex;\n         }\n      }\n\n      &.is-phone {\n         #phone-button {\n            display: flex;\n         }\n      }\n\n      &.is-contact {\n         #contact-button {\n            display: flex;\n         }\n      }\n\n      &.is-appointment {\n         #appointment-button {\n            display: flex;\n         }\n      }\n\n      &.is-office {\n         #office-button {\n            display: flex;\n         }\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .pre-footer-widget {}\n   }\n</style>";
 
   function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
   function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
@@ -1016,16 +1021,19 @@
       _this.attachShadow({
         mode: 'open'
       });
-      _this.isChat = 0;
-      _this.isPhone = 0;
+      _this.widgetId = 'widget';
+      _this.isChat = false;
+      _this.chatId = null;
+      _this.isPhone = false;
       _this.phoneNumber = null;
-      _this.isContact = 0;
+      _this.isContact = false;
       _this.contactForm = null;
-      _this.isAppointment = 0;
+      _this.isAppointment = false;
       _this.appointmentUrl = null;
-      _this.text = null;
+      _this.infoText = null;
+      _this.isListeningQuery = false;
       _this.loadTemplate().then(function () {
-        _this.getParams();
+        _this.getAttributes();
         _this.addLanguageContent();
         _this.listenChatButton();
       });
@@ -1052,23 +1060,76 @@
         return loadTemplate;
       }()
     }, {
-      key: "getParams",
-      value: function getParams() {
+      key: "getAttributes",
+      value: function getAttributes() {
+        // get attributes from the element 
+        /*
+           Attributes:
+           - chat: boolean                  // display chat button (default: false)
+           - chat-id: string                // chat widget id (default: null)
+           - phone: boolean                 // display phone button (default: false)
+           - phone-number: string           // phone number (default: null)
+           - contact: boolean               // display contact button (default: false)
+           - contact-form: string           // contact form url (default: null)
+           - appointment: boolean           // display appointment button (default: false)
+           - appointment-url: string        // appointment url (default: null)
+           - info-text: JSON                // display text (default: null)
+           - listening-query: boolean       // listen query params (default: false)
+        */
+
+        this.isChat = this.getAttribute('chat') !== null && this.getAttribute('chat') !== 'false';
+        this.chatId = this.getAttribute('chat-id') || null;
+        this.isPhone = this.getAttribute('phone') !== null && this.getAttribute('phone') !== 'false';
+        this.phoneNumber = this.getAttribute('phone-number') || null;
+        this.isContact = this.getAttribute('contact') !== null && this.getAttribute('contact') !== 'false';
+        this.contactForm = this.getAttribute('contact-form') || null;
+        this.isAppointment = this.getAttribute('appointment') !== null && this.getAttribute('appointment') !== 'false';
+        this.appointmentUrl = this.getAttribute('appointment-url') || null;
+        this.infoText = this.getAttribute('info-text') ? JSON.parse(this.getAttribute('info-text')) : null;
+        this.isListeningQuery = this.getAttribute('listening-query') !== null && this.getAttribute('listening-query') !== 'false';
+
+        // set attributes to the widget
+        if (this.isChat) {
+          this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-chat');
+        }
+        if (this.isPhone) {
+          this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-phone');
+        }
+        if (this.isContact) {
+          this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-contact');
+        }
+        if (this.isAppointment) {
+          this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-appointment');
+        }
+        if (this.infoText) {
+          var lang = document.documentElement.lang || 'en';
+          this.shadowRoot.querySelector("#".concat(this.widgetId, " #info-text")).innerHTML = this.infoText[lang];
+        }
+
+        // listening query
+        if (this.isListeningQuery) {
+          this.listenQuery();
+        }
+      }
+    }, {
+      key: "listenQuery",
+      value: function listenQuery() {
         /*
            Params:
            - sdg-pf-chat=0              // display chat button (default: 0)
            - sdg-pf-phone=0             // display phone button (default: 0)
            - sdg-pf-phone-number=...    // phone number (default: null)
            - sdg-pf-contact=0           // display contact button (default: 0)
-           - sdg-pf-contact-url=...      // contact form url (default: null)
+           - sdg-pf-contact-url=...     // contact form url (default: null)
            - sdg-pf-appointment=0       // display appointment button (default: 0)
            - sdg-pf-appointment-url=... // appointment url (default: null)
            - sdg-pf-text                // display text (default: 0)
             example:
-           /demo/pre-footer-widget.html?sdg-feed-min=0&sdg-feed-rating=1&sdg-feed-text=1&sdg-feed-open=1&sdg-feed-overlay-click=0&sdg-button-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
+           /demo/pre-footer-widget.html?sdg-feed-min=0&sdg-feed-rating=1&sdg-feed-text=1&sdg-feed-open=1&sdg-feed-overlay-close=0&sdg-button-id=fb4761e7-0ee2-48fd-89f3-ae7950f1c946
         */
         var urlParams = new URLSearchParams(window.location.search);
         this.isChat = urlParams.has('sdg-pf-chat') && urlParams.get('sdg-pf-chat') === '1';
+        this.chatId = urlParams.has('sdg-pf-chat-id') ? urlParams.get('sdg-pf-chat-id') : null;
         this.isPhone = urlParams.has('sdg-pf-phone') && urlParams.get('sdg-pf-phone') === '1';
         this.phoneNumber = urlParams.has('sdg-pf-phone-number') ? urlParams.get('sdg-pf-phone-number') : null;
         this.isContact = urlParams.has('sdg-pf-contact') && urlParams.get('sdg-pf-contact') === '1';
@@ -1076,12 +1137,6 @@
         this.isAppointment = urlParams.has('sdg-pf-appointment') && urlParams.get('sdg-pf-appointment') === '1';
         this.appointmentUrl = urlParams.has('sdg-pf-appointment-url') ? urlParams.get('sdg-pf-appointment-url') : null;
         this.text = urlParams.has('sdg-pf-text') ? urlParams.get('sdg-pf-text') : null;
-
-        // add class to the widget
-        // minized
-        if (this.isMinified) {
-          this.shadowRoot.querySelector('#widget').classList.add('minimized');
-        }
       }
     }, {
       key: "addLanguageContent",
@@ -1098,33 +1153,41 @@
         // Get the website's language
         var locale = locales[lang] || locales['en'];
         // Set content to current language
-        if (headerTitle && chatButton && phoneButton && emailButton && appointmentButton && officeButton && info) {
+        if (headerTitle) {
           headerTitle.textContent = locale.title;
+        }
+        if (chatButton) {
           chatButton.querySelector('.title').textContent = locale.buttons.chat.title;
           chatButton.querySelector('.description').textContent = locale.buttons.chat.text;
+        }
+        if (phoneButton) {
           phoneButton.querySelector('.title').textContent = locale.buttons.phone.title;
           phoneButton.querySelector('.description').textContent = locale.buttons.phone.text;
+        }
+        if (emailButton) {
           emailButton.querySelector('.title').textContent = locale.buttons.email.title;
           emailButton.querySelector('.description').textContent = locale.buttons.email.text;
+        }
+        if (appointmentButton) {
           appointmentButton.querySelector('.title').textContent = locale.buttons.appointment.title;
           appointmentButton.querySelector('.description').textContent = locale.buttons.appointment.text;
+        }
+        if (officeButton) {
           officeButton.querySelector('.title').textContent = locale.buttons.office.title;
           officeButton.querySelector('.description').textContent = locale.buttons.office.text;
+        }
+        if (info) {
           info.textContent = locale.info;
-
-          // hide office-button
-          officeButton.style.display = 'none';
         }
       }
     }, {
       key: "listenChatButton",
       value: function listenChatButton() {
+        var _this2 = this;
         var chatButton = this.shadowRoot.querySelector('#chat-button');
         chatButton.addEventListener('click', function () {
-          console.log('chat');
-
           // Open feedback-widget
-          var feedbackWidget = document.querySelector('feedback-widget');
+          var feedbackWidget = _this2.chatId ? document.querySelector("#".concat(_this2.chatId)) : document.querySelector('sdg-feedback-widget');
           if (feedbackWidget) {
             // remove closed class inside the feedback widget shadow root
             var feedbackWidgetShadowRoot = feedbackWidget.shadowRoot;
@@ -1133,7 +1196,7 @@
               closedClass.classList.remove('closed');
             }
             // open the feedback widget
-            // feedbackWidget.open();
+            feedbackWidget.open();
           } else {
             console.error('Feedback widget not found');
           }
