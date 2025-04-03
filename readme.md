@@ -4,17 +4,27 @@
 You can see the demo of the widget [here](./demo)
 
 ## Components
+---
 ### Feedback widget
+The feedback widget is a custom web component that allows users to provide feedback on a website. 
+
+It is designed to be easily integrated into any website and can be customized with various attributes.
+
+The widget can be opened and closed, and it can display different fields such as rating and text input.
+
 #### Attributes:
+
     - button-id="String"              Button ID (default: null)
-    - minified="Boolean"              Is widget minified when closed (default: false)
+    - minimized"Boolean"              Is widget minimized when closed (default: false)
     - rating="Boolean"                Display rating field (default: false)
     - text-number="String"            Display text field (default: false)
     - closed="Boolean"                Is widget closed (default: true)
     - overlay-close-form="Boolean"    Overlay click closes the widget (default: true)
     - listening-query="Boolean"       Listen query params (default: false)
+    - text-length-limit="Number"      Text length limit (default: 500)
+    - feedback-url="String"           Feedback submit URL (default: null)
 
-#### Examples:
+Examples:
 ```html
 <!-- Default -->
 <sdg-feedback-widget/>
@@ -22,7 +32,7 @@ You can see the demo of the widget [here](./demo)
 <!-- With parameters -->
 <sdg-feedback-widget
   button-id="e0f2b1d3-5f7e-4a6b-a0d1-3f2c5e7f8b9c"
-  minified="true"
+  minimize="true"
   rating="true"
   text="true"
   closed="false"
@@ -31,6 +41,32 @@ You can see the demo of the widget [here](./demo)
 ></sdg-feedback-widget>
 ```
 
+#### Functions:
+The following functions are available to control the widget from the outside:
+
+    - `open()`: Opens the widget.
+    - `close()`: Closes the widget.
+    - `displayMinimize()`: Displays the widget in a minimized state.
+    - `hideMinimize()`: Hides the widget in a minimized state.
+    - `displayRating()`: Displays the rating field.
+    - `hideRating()`: Hides the rating field.
+    - `displayText()`: Displays the text field.
+    - `hideText()`: Hides the text field.
+
+Example usage:
+```javascript
+const feedbackWidget = document.querySelector('sdg-feedback-widget');
+feedbackWidget.open();
+feedbackWidget.close();
+feedbackWidget.displayMinimize();
+feedbackWidget.hideMinimize();
+feedbackWidget.displayRating();
+feedbackWidget.hideRating();
+feedbackWidget.displayText();
+feedbackWidget.hideText();
+```
+
+---
 ### Pre-footer widget
 #### Attributes:
     - chat="Boolean"              Display chat button (default: false)
