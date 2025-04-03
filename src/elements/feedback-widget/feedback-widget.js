@@ -35,20 +35,20 @@ class SDGFeedbackWidget extends HTMLElement {
    constructor () {
       super();
       this.attachShadow({ mode: 'open' });
+      this.widgetId = 'sdg-feedback-widget';
       this.deviceId = new Date().toISOString()
       this.buttonId = null;
       this.isRating = false;
       this.isText = false;
-      this.isMinified = true;
+      this.isMinimize = true;
       this.isOverlayClose = true;
       this._isSubmittable = false;
       this._isSubmit = false;
-      this._isClosed = true;
+      this.isOpen = true;
 
       this._rating = 0;
       this._text = '';
       this.textLengthLimit = 256;
-
       this.feedbackUrl = 'http://localhost:8082/api/public/feedbacks';
 
       this.loadTemplate()
@@ -56,11 +56,9 @@ class SDGFeedbackWidget extends HTMLElement {
             this.getAttributes();
             this.addLanguageContent();
             this.listenCloseButton();
-            this.listenToOverlay();
-            this.listenToOpen();
-            this.listenRating();
-            this.listenTextfield();
+            this.listenToMinimized();
             this.listenSubmit();
+            this.listenToOverlay()
          })
    }
 
@@ -70,12 +68,7 @@ class SDGFeedbackWidget extends HTMLElement {
 
    set rating (value) {
       this._rating = value;
-
-      if (this._text?.length > 0 && this._rating) {
-         this.isSubmittable = true
-      } else {
-         this.isSubmittable = false
-      }
+      this.isIsSubmittable()
    }
 
    get text () {
@@ -84,12 +77,7 @@ class SDGFeedbackWidget extends HTMLElement {
 
    set text (value) {
       this._text = value;
-
-      if (this._text?.length > 0 && this._rating) {
-         this.isSubmittable = true
-      } else {
-         this.isSubmittable = false
-      }
+      this.isIsSubmittable()
    }
 
    get isSubmittable () {
@@ -108,22 +96,6 @@ class SDGFeedbackWidget extends HTMLElement {
       }
    }
 
-   get isClosed () {
-      return this._isClosed;
-   }
-
-   set isClosed (value) {
-      this._isClosed = value;
-
-      // add closed class to the widget
-      const widget = this.shadowRoot.querySelector('#widget');
-      if (value) {
-         this.isMinified ? widget.classList.add('minimized') : widget.classList.add('closed');
-      } else {
-         this.isMinified ? widget.classList.remove('minimized') : widget.classList.remove('closed');
-      }
-   }
-
    get isSubmit () {
       return this._isSubmit;
    }
@@ -132,7 +104,7 @@ class SDGFeedbackWidget extends HTMLElement {
       this._isSubmit = value;
 
       // add submit class to the widget
-      const widget = this.shadowRoot.querySelector('#widget');
+      const widget = this.shadowRoot.querySelector(`#${this.widgetId}`);
       if (value) {
          widget.classList.add('submitted');
       } else {
@@ -140,8 +112,64 @@ class SDGFeedbackWidget extends HTMLElement {
       }
    }
 
+   isIsSubmittable () {
+      switch (true) {
+         case !this.isText && this.isRating && this.rating > 0:
+            this.isSubmittable = true;
+            break;
+         case !this.isRating && this.isText && this.text?.length > 0:
+            this.isSubmittable = true;
+            break;
+         case this.isText && this.isRating && this.rating > 0 && this.text?.length > 0:
+            this.isSubmittable = true;
+            break;
+         default:
+            this.isSubmittable = false;
+            break;
+      }
+   }
+
+   // Widget functions
    open () {
-      this.isClosed = false;
+      this.isOpen = false;
+      this.shadowRoot.querySelector(`#${this.widgetId}`).classList.add('is-open');
+   }
+
+   close () {
+      this.isOpen = true;
+      this.shadowRoot.querySelector(`#${this.widgetId}`).classList.remove('is-open');
+   }
+
+   displayMinimize () {
+      this.isMinimize = false;
+      this.shadowRoot.querySelector(`#${this.widgetId}`).classList.add('is-minimize');
+   }
+
+   hideMinimize () {
+      this.isMinimize = true;
+      this.shadowRoot.querySelector(`#${this.widgetId}`).classList.remove('is-minimize');
+   }
+
+   displayRating () {
+      this.isRating = true;
+      this.shadowRoot.querySelector(`#${this.widgetId}`).classList.add('is-rating');
+      this.listenRating();
+   }
+
+   hideRating () {
+      this.isRating = false;
+      this.shadowRoot.querySelector(`#${this.widgetId}`).classList.remove('is-rating');
+   }
+
+   displayText () {
+      this.isText = true;
+      this.shadowRoot.querySelector(`#${this.widgetId}`).classList.add('is-text');
+      this.listenTextfield();
+   }
+
+   hideText () {
+      this.isText = false;
+      this.shadowRoot.querySelector(`#${this.widgetId}`).classList.remove('is-text');
    }
 
    async loadTemplate () {
@@ -150,40 +178,31 @@ class SDGFeedbackWidget extends HTMLElement {
 
    getAttributes () {
       // get attributes from the element 
-      const buttonId = this.getAttribute('button-id');
-      const isMinified = this.getAttribute('minified');
-      const isRating = this.getAttribute('rating');
-      const isText = this.getAttribute('text');
-      const isClosed = this.getAttribute('closed');
-      const isOverlayClose = this.getAttribute('overlay-close');
-      const isListeningQuery = this.getAttribute('listening-query');
-
-      console.log('buttonId', buttonId);
-      console.log('isMinified', isMinified);
-      console.log('isRating', isRating);
-      console.log('isText', isText);
-      console.log('isClosed', isClosed);
-      console.log('isOverlayClose', isOverlayClose);
-
-      // set attributes to the element
-      this.buttonId = buttonId;
-      this.isMinified = isMinified === 'true' ? true : this.isMinified;
-      this.isRating = isRating === 'true' ? true : this.isRating;
-      this.isText = isText === 'true' ? true : this.isText;
-      this.isClosed = isClosed === 'true' ? true : this.isClosed;
-      this.isOverlayClose = isOverlayClose === 'true' ? true : this.isOverlayClose;
-      this.isListeningQuery = isListeningQuery === 'true' ? true : false;
-
+      this.buttonId = this.getAttribute('button-id') || null;
+      this.isMinimize = this.getAttribute('minimize') !== null && this.getAttribute('minimize') !== 'false'
+      this.isRating = this.getAttribute('rating') !== null && this.getAttribute('rating') !== 'false';
+      this.isText = this.getAttribute('text') !== null && this.getAttribute('text') !== 'false';
+      this.isOpen = this.getAttribute('open') !== null && this.getAttribute('open') !== 'false';
+      this.isOverlayClose = this.getAttribute('overlay-close') !== null && this.getAttribute('overlay-close') !== 'false';
+      this.isListeningQuery = this.getAttribute('listening-query') !== null && this.getAttribute('listening-query') !== 'false';
+      this.textLengthLimit = this.getAttribute('text-length-limit') || this.textLengthLimit;
+      this.feedbackUrl = this.getAttribute('feedback-url') || this.feedbackUrl;
+   
       // set attributes to the widget
       // minimized
-      if (this.isMinified) {
-         this.shadowRoot.querySelector('#widget').classList.add('minimized');
-      }
+      if (this.isMinimize) { this.displayMinimize() }
+
+      // is open
+      if (this.isOpen) { this.open() }
+
+      // is rating
+      if (this.isRating) { this.displayRating() }
+
+      // is text
+      if (this.isText) { this.displayText() }
 
       // listening query
-      if (this.isListeningQuery) {
-         this.listenQuery();
-      }
+      if (this.isListeningQuery) { this.listenQuery() }
    }
 
    listenQuery () {
@@ -202,16 +221,16 @@ class SDGFeedbackWidget extends HTMLElement {
       const urlParams = new URLSearchParams(window.location.search);
 
       this.buttonId = urlParams.has('sdg-fw-id') ? urlParams.get('sdg-fw-id') : this.buttonId;
-      this.isMinified = urlParams.has('sdg-fw-min') && urlParams.get('sdg-fw-min') === '1';
+      this.isMinimize = urlParams.has('sdg-fw-min') && urlParams.get('sdg-fw-min') === '1';
       this.isRating = urlParams.has('sdg-fw-rating') && urlParams.get('sdg-fw-rating') === '1';
       this.isText = urlParams.has('sdg-fw-text') && urlParams.get('sdg-fw-text') === '1';
-      this.isClosed = !urlParams.has('sdg-fw-open') || urlParams.get('sdg-fw-open') === '0';
+      this.isOpen = !urlParams.has('sdg-fw-open') || urlParams.get('sdg-fw-open') === '0';
       this.isOverlayClose = urlParams.has('sdg-fw-overlay-close') && urlParams.get('sdg-fw-overlay-close') === '1';
 
       // add class to the widget
       // minized
-      if (this.isMinified) {
-         this.shadowRoot.querySelector('#widget').classList.add('minimized');
+      if (this.isMinimize) {
+         this.shadowRoot.querySelector(`#${this.widgetId}`).classList.add('minimized');
       }
    }
 
@@ -238,21 +257,21 @@ class SDGFeedbackWidget extends HTMLElement {
    listenCloseButton () {
       const close = this.shadowRoot.querySelector('#close');
       close.addEventListener('click', () => {
-         this.isClosed = true;
+         this.close();
       });
    }
 
    listenToOverlay () {
       const overlay = this.shadowRoot.querySelector('#overlay');
       overlay.addEventListener('click', () => {
-         if (this.isOverlayClose) { this.isClosed = true; }
+         if (this.isOverlayClose) { this.close() }
       });
    }
 
-   listenToOpen () {
-      const open = this.shadowRoot.querySelector('#open');
+   listenToMinimized () {
+      const open = this.shadowRoot.querySelector('#minimized-feedback');
       open.addEventListener('click', () => {
-         this.isClosed = false;
+         this.open()
       });
    }
 

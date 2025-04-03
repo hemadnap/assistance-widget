@@ -1,10 +1,10 @@
 <div
-   id="widget"
-   class="widget"
+   id="sdg-feedback-widget"
+   class="sdg-feedback-widget"
 >
    <!-- Closed feedback widget -->
    <div
-      id="open"
+      id="minimized-feedback"
       class="minimized-feedback"
    >
       Feedback widget
@@ -154,11 +154,11 @@
       --color-error: #d4003c;
    }
 
-   .widget {
+   .sdg-feedback-widget {
       z-index: 1000;
 
       .overlay {
-         display: flex;
+         display: none;
          position: fixed;
          top: 0;
          left: 0;
@@ -197,7 +197,7 @@
       }
 
       .feedback-widget {
-         display: flex;
+         display: none;
          flex-direction: column;
          align-items: center;
          justify-content: center;
@@ -215,8 +215,8 @@
          padding: 16px;
          z-index: 1000;
 
-         &.closed {
-            display: none;
+         &.is-open {
+            display: flex;
          }
 
 
@@ -270,7 +270,7 @@
 
             /* Rating */
             .rating {
-               display: flex;
+               display: none;
                flex-direction: column;
                align-items: start;
                gap: 20px;
@@ -323,7 +323,7 @@
 
             /* Text */
             .text {
-               display: flex;
+               display: none;
                flex-direction: column;
                align-items: start;
                gap: 10px;
@@ -413,36 +413,51 @@
             }
          }
       }
-   }
 
-   /* Minimized widget */
-   .widget.minimized {
-      .overlay {
-         display: none;
+      /* Minimized widget */
+      &.is-minimize {
+         .overlay {
+            display: none;
+         }
+
+         .minimized-feedback {
+            display: flex;
+         }
+
+         .feedback-widget {
+            display: none;
+         }
       }
 
-      .minimized-feedback {
-         display: flex;
+      /* Open widget */
+      &.is-open {
+         .overlay {
+            display: flex;
+         }
+
+         .minimized-feedback {
+            display: none;
+         }
+
+         .feedback-widget {
+            display: flex;
+         }
       }
 
-      .feedback-widget {
-         display: none;
-      }
-   }
-
-   /* Closed widget */
-   .widget.closed {
-      .overlay {
-         display: none;
+      /* is text */
+      &.is-text {
+        .form .text {
+            display: flex;
+         }
       }
 
-      .minimized-feedback {
-         display: none;
+      /* is rating */
+      &.is-rating {
+        .form .rating {
+            display: flex;
+         }
       }
 
-      .feedback-widget {
-         display: none;
-      }
    }
 
    /* Sumbit content */
