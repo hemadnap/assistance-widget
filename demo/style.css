@@ -1,0 +1,30 @@
+ html {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    font-family: "Roboto", sans-serif;
+    background: #f4f4f4;
+ }
+
+ body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 20px;
+ }
+
+ .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+ }
+
+ pre {
+    background: #1c1c1c;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    overflow-x: auto;
+ }
