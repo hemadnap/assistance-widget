@@ -521,7 +521,7 @@
   var regeneratorExports = requireRegenerator();
   var _regeneratorRuntime = /*@__PURE__*/getDefaultExportFromCjs(regeneratorExports);
 
-  var template$1 = "<div id=\"widget\" class=\"widget\">\n   <!-- Closed feedback widget -->\n   <div id=\"open\" class=\"minimized-feedback\">\n      Feedback widget\n   </div>\n\n   <!-- Open feedback widget -->\n   <div class=\"feedback-widget\">\n      <!-- Header -->\n      <header>\n         <div id=\"title\" class=\"title\"></div>\n\n         <a id=\"close\" class=\"close\">\n            <img src=\"/src/assets/icons/close.svg\" alt=\"Close\">\n         </a>\n      </header>\n\n      <main>\n         <div class=\"form\">\n            <!-- Rating -->\n            <div class=\"rating\">\n               <div id=\"rating-label\" class=\"label\"></div>\n               <input type=\"text\" id=\"rating-value\" hidden>\n               <div class=\"rates\">\n                  <a id=\"rate-1\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">1</span>\n                  </a>\n                  <a id=\"rate-2\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">2</span>\n                  </a>\n                  <a id=\"rate-3\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">3</span>\n                  </a>\n                  <a id=\"rate-4\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">4</span>\n                  </a>\n                  <a id=\"rate-5\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">5</span>\n                  </a>\n               </div>\n            </div>\n\n            <!-- Text -->\n            <div class=\"text\">\n               <div id=\"text-label\" class=\"label\"></div>\n               <div id=\"text-component\" class=\"text-component\">\n                  <textarea id=\"text-value\"></textarea>\n                  <div id=\"text-info\" class=\"text-info\"></div>\n               </div>\n            </div>\n\n            <!-- Submit -->\n            <button id=\"submit\" disabled=\"disabled\"></button>\n         </div>\n\n         <!-- Submitted message -->\n         <div id=\"submitted-message\" class=\"submitted-message\"></div>\n      </main>\n   </div>\n\n   <!-- Overlay -->\n   <div id=\"overlay\" class=\"overlay\"></div>\n</div>\n\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n      --color-overlay: #bfc0c6;\n      --color-error: #d4003c;\n   }\n\n   .widget {\n      z-index: 1000;\n\n      .overlay {\n         display: flex;\n         position: fixed;\n         top: 0;\n         left: 0;\n         width: 100%;\n         height: 100%;\n         background: #0203067A;\n         ;\n         z-index: 999;\n      }\n\n      .minimized-feedback {\n         display: none;\n         justify-content: center;\n         align-items: center;\n         cursor: pointer;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         padding: 5px 10px;\n         background: #6EC8F2;\n         border: 2px solid #006F9E !important;\n         border-top-right-radius: 8px;\n         border-top-left-radius: 8px;\n         font-family: \"Barlow\", sans-serif;\n         font-size: 18px;\n         line-height: 28px;\n         font-weight: 400;\n         vertical-align: middle;\n         cursor: pointer;\n         z-index: 1000;\n         transition: .1s;\n\n         &:hover {\n            background: #DAF2FC;\n         }\n      }\n\n      .feedback-widget {\n         display: flex;\n         flex-direction: column;\n         align-items: center;\n         justify-content: center;\n         gap: 10px;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         width: 400px;\n         background: #FFFFFF;\n         padding: 10px;\n         box-shadow: 0px 4px 16px #0C0F1E1A;\n         border-top-left-radius: 16px;\n         border-top-right-radius: 16px;\n         color: #2B2D42;\n         padding: 16px;\n         z-index: 1000;\n\n         &.closed {\n            display: none;\n         }\n\n\n         /* Header */\n         header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            width: 100%;\n\n            .title {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 22px;\n               line-height: 28px;\n               font-weight: 600;\n               vertical-align: middle;\n               width: 100%;\n            }\n\n            .close {\n               display: flex;\n               justify-content: center;\n               align-items: center;\n               cursor: pointer;\n               transition: .1s;\n               padding: 3px;\n               border-radius: 4px;\n\n               &:hover {\n                  background: #F5F5F5;\n               }\n            }\n         }\n\n\n         /* Main */\n         main,\n         .form {\n            display: flex;\n            flex-direction: column;\n            gap: 10px;\n            width: 100%;\n\n            .label {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 24px;\n               font-weight: 700;\n               width: 100%;\n            }\n\n            /* Rating */\n            .rating {\n               display: flex;\n               flex-direction: column;\n               align-items: start;\n               gap: 20px;\n               margin: 10px 0;\n               width: 100%;\n\n               .rates {\n                  display: flex;\n                  gap: 8px;\n                  width: 100%;\n\n                  .rate {\n                     display: flex;\n                     flex-direction: column;\n                     align-items: center;\n                     gap: 5px;\n                     cursor: pointer;\n                     position: relative;\n                     width: 40px;\n                     height: 40px;\n\n                     * {\n                        position: absolute;\n                     }\n\n                     .value {\n                        font-family: \"Barlow\", sans-serif;\n                        font-size: 14px;\n                        line-height: 28px;\n                        font-weight: 600;\n                        padding-top: 8px;\n                     }\n\n                     img {\n                        content: url('/src/assets/icons/star.svg');\n                        background-size: cover;\n                        width: 40px;\n                     }\n\n                     &:hover img {\n                        content: url('/src/assets/icons/star-hover.svg');\n                     }\n\n                     &.active img {\n                        content: url('/src/assets/icons/star-active.svg');\n                     }\n                  }\n               }\n            }\n\n            /* Text */\n            .text {\n               display: flex;\n               flex-direction: column;\n               align-items: start;\n               gap: 10px;\n               width: 100%;\n\n               .text-component {\n                  display: flex;\n                  flex-direction: column;\n                  align-items: start;\n                  gap: 2px;\n                  width: 100%;\n\n                  textarea {\n                     height: 100px;\n                     border: 2px solid #6D6E83;\n                     border-radius: 4px;\n                     width: 100%;\n                     max-width: calc(100% - 5px);\n                     resize: vertical;\n                     outline: none;\n                  }\n\n                  .text-info {\n                     font-family: \"Barlow\", sans-serif;\n                     font-size: 14px;\n                     line-height: 24px;\n                     font-weight: 400;\n                     color: #6D6E83;\n                  }\n\n                  &.error {\n                     textarea {\n                        border: 2px solid #d4003c;\n                     }\n\n                     .text-info {\n                        color: #d4003c;\n                     }\n                  }\n               }\n            }\n\n            /* Submit */\n            button {\n               width: 100%;\n               height: 48px;\n               padding: 10px 20px;\n               background: #6EC8F2;\n               border: 2px solid #006F9E !important;\n               color: #2B2D42;\n               border: none;\n               border-radius: 8px;\n               cursor: pointer;\n               margin-top: 30px;\n               transition: .1s;\n               font-family: \"Roboto\", sans-serif;\n               font-size: 16px;\n               line-height: 24px;\n               font-weight: 600;\n\n               &:hover {\n                  background: #DAF2FC;\n               }\n\n               &:disabled {\n                  opacity: .6;\n                  cursor: inherit;\n\n                  &:hover {\n                     background: #6EC8F2;\n                  }\n\n               }\n            }\n\n            .submitted-message {\n               display: none;\n               justify-content: center;\n               align-items: center;\n               gap: 10px;\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 28px;\n               font-weight: 400;\n               color: #2B2D42;\n               padding: 50px 0;\n            }\n         }\n      }\n   }\n\n   /* Minimized widget */\n   .widget.minimized {\n      .overlay {\n         display: none;\n      }\n\n      .minimized-feedback {\n         display: flex;\n      }\n\n      .feedback-widget {\n         display: none;\n      }\n   }\n\n   /* Closed widget */\n   .widget.closed {\n      .overlay {\n         display: none;\n      }\n\n      .minimized-feedback {\n         display: none;\n      }\n\n      .feedback-widget {\n         display: none;\n      }\n   }\n\n   /* Sumbit content */\n   .submitted main {\n      .form {\n         display: none;\n      }\n\n      .submitted-message {\n         display: flex;\n         flex-direction: column;\n         align-items: center;\n         gap: 10px;\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .feedback-widget {\n         width: calc(100% - 35px);\n         right: 0;\n      }\n   }\n</style>";
+  var template$1 = "<div id=\"sdg-feedback-widget\" class=\"sdg-feedback-widget\">\n   <!-- Closed feedback widget -->\n   <div id=\"minimized-feedback\" class=\"minimized-feedback\">\n      Feedback widget\n   </div>\n\n   <!-- Open feedback widget -->\n   <div class=\"feedback-widget\">\n      <!-- Header -->\n      <header>\n         <div id=\"title\" class=\"title\"></div>\n\n         <a id=\"close\" class=\"close\">\n            <img src=\"/src/assets/icons/close.svg\" alt=\"Close\">\n         </a>\n      </header>\n\n      <main>\n         <div class=\"form\">\n            <!-- Rating -->\n            <div class=\"rating\">\n               <div id=\"rating-label\" class=\"label\"></div>\n               <input type=\"text\" id=\"rating-value\" hidden>\n               <div class=\"rates\">\n                  <a id=\"rate-1\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">1</span>\n                  </a>\n                  <a id=\"rate-2\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">2</span>\n                  </a>\n                  <a id=\"rate-3\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">3</span>\n                  </a>\n                  <a id=\"rate-4\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">4</span>\n                  </a>\n                  <a id=\"rate-5\" class=\"rate\">\n                     <img src=\"/src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">5</span>\n                  </a>\n               </div>\n            </div>\n\n            <!-- Text -->\n            <div class=\"text\">\n               <div id=\"text-label\" class=\"label\"></div>\n               <div id=\"text-component\" class=\"text-component\">\n                  <textarea id=\"text-value\"></textarea>\n                  <div id=\"text-info\" class=\"text-info\"></div>\n               </div>\n            </div>\n\n            <!-- Submit -->\n            <button id=\"submit\" disabled=\"disabled\"></button>\n         </div>\n\n         <!-- Submitted message -->\n         <div id=\"submitted-message\" class=\"submitted-message\"></div>\n      </main>\n   </div>\n\n   <!-- Overlay -->\n   <div id=\"overlay\" class=\"overlay\"></div>\n</div>\n\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n      --color-overlay: #bfc0c6;\n      --color-error: #d4003c;\n   }\n\n   .sdg-feedback-widget {\n      z-index: 1000;\n\n      .overlay {\n         display: none;\n         position: fixed;\n         top: 0;\n         left: 0;\n         width: 100%;\n         height: 100%;\n         background: #0203067A;\n         ;\n         z-index: 999;\n      }\n\n      .minimized-feedback {\n         display: none;\n         justify-content: center;\n         align-items: center;\n         cursor: pointer;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         padding: 5px 10px;\n         background: #6EC8F2;\n         border: 2px solid #006F9E !important;\n         border-top-right-radius: 8px;\n         border-top-left-radius: 8px;\n         font-family: \"Barlow\", sans-serif;\n         font-size: 18px;\n         line-height: 28px;\n         font-weight: 400;\n         vertical-align: middle;\n         cursor: pointer;\n         z-index: 1000;\n         transition: .1s;\n\n         &:hover {\n            background: #DAF2FC;\n         }\n      }\n\n      .feedback-widget {\n         display: none;\n         flex-direction: column;\n         align-items: center;\n         justify-content: center;\n         gap: 10px;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         width: 400px;\n         background: #FFFFFF;\n         padding: 10px;\n         box-shadow: 0px 4px 16px #0C0F1E1A;\n         border-top-left-radius: 16px;\n         border-top-right-radius: 16px;\n         color: #2B2D42;\n         padding: 16px;\n         z-index: 1000;\n\n         &.is-open {\n            display: flex;\n         }\n\n\n         /* Header */\n         header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            width: 100%;\n\n            .title {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 22px;\n               line-height: 28px;\n               font-weight: 600;\n               vertical-align: middle;\n               width: 100%;\n            }\n\n            .close {\n               display: flex;\n               justify-content: center;\n               align-items: center;\n               cursor: pointer;\n               transition: .1s;\n               padding: 3px;\n               border-radius: 4px;\n\n               &:hover {\n                  background: #F5F5F5;\n               }\n            }\n         }\n\n\n         /* Main */\n         main,\n         .form {\n            display: flex;\n            flex-direction: column;\n            gap: 10px;\n            width: 100%;\n\n            .label {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 24px;\n               font-weight: 700;\n               width: 100%;\n            }\n\n            /* Rating */\n            .rating {\n               display: none;\n               flex-direction: column;\n               align-items: start;\n               gap: 20px;\n               margin: 10px 0;\n               width: 100%;\n\n               .rates {\n                  display: flex;\n                  gap: 8px;\n                  width: 100%;\n\n                  .rate {\n                     display: flex;\n                     flex-direction: column;\n                     align-items: center;\n                     gap: 5px;\n                     cursor: pointer;\n                     position: relative;\n                     width: 40px;\n                     height: 40px;\n\n                     * {\n                        position: absolute;\n                     }\n\n                     .value {\n                        font-family: \"Barlow\", sans-serif;\n                        font-size: 14px;\n                        line-height: 28px;\n                        font-weight: 600;\n                        padding-top: 8px;\n                     }\n\n                     img {\n                        content: url('/src/assets/icons/star.svg');\n                        background-size: cover;\n                        width: 40px;\n                     }\n\n                     &:hover img {\n                        content: url('/src/assets/icons/star-hover.svg');\n                     }\n\n                     &.active img {\n                        content: url('/src/assets/icons/star-active.svg');\n                     }\n                  }\n               }\n            }\n\n            /* Text */\n            .text {\n               display: none;\n               flex-direction: column;\n               align-items: start;\n               gap: 10px;\n               width: 100%;\n\n               .text-component {\n                  display: flex;\n                  flex-direction: column;\n                  align-items: start;\n                  gap: 2px;\n                  width: 100%;\n\n                  textarea {\n                     height: 100px;\n                     border: 2px solid #6D6E83;\n                     border-radius: 4px;\n                     width: 100%;\n                     max-width: calc(100% - 5px);\n                     resize: vertical;\n                     outline: none;\n                  }\n\n                  .text-info {\n                     font-family: \"Barlow\", sans-serif;\n                     font-size: 14px;\n                     line-height: 24px;\n                     font-weight: 400;\n                     color: #6D6E83;\n                  }\n\n                  &.error {\n                     textarea {\n                        border: 2px solid #d4003c;\n                     }\n\n                     .text-info {\n                        color: #d4003c;\n                     }\n                  }\n               }\n            }\n\n            /* Submit */\n            button {\n               width: 100%;\n               height: 48px;\n               padding: 10px 20px;\n               background: #6EC8F2;\n               border: 2px solid #006F9E !important;\n               color: #2B2D42;\n               border: none;\n               border-radius: 8px;\n               cursor: pointer;\n               margin-top: 30px;\n               transition: .1s;\n               font-family: \"Roboto\", sans-serif;\n               font-size: 16px;\n               line-height: 24px;\n               font-weight: 600;\n\n               &:hover {\n                  background: #DAF2FC;\n               }\n\n               &:disabled {\n                  opacity: .6;\n                  cursor: inherit;\n\n                  &:hover {\n                     background: #6EC8F2;\n                  }\n\n               }\n            }\n\n            .submitted-message {\n               display: none;\n               justify-content: center;\n               align-items: center;\n               gap: 10px;\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 28px;\n               font-weight: 400;\n               color: #2B2D42;\n               padding: 50px 0;\n            }\n         }\n      }\n\n      /* Minimized widget */\n      &.is-minimize {\n         .overlay {\n            display: none;\n         }\n\n         .minimized-feedback {\n            display: flex;\n         }\n\n         .feedback-widget {\n            display: none;\n         }\n      }\n\n      /* Open widget */\n      &.is-open {\n         .overlay {\n            display: flex;\n         }\n\n         .minimized-feedback {\n            display: none;\n         }\n\n         .feedback-widget {\n            display: flex;\n         }\n      }\n\n      /* is text */\n      &.is-text {\n        .form .text {\n            display: flex;\n         }\n      }\n\n      /* is rating */\n      &.is-rating {\n        .form .rating {\n            display: flex;\n         }\n      }\n\n   }\n\n   /* Sumbit content */\n   .submitted main {\n      .form {\n         display: none;\n      }\n\n      .submitted-message {\n         display: flex;\n         flex-direction: column;\n         align-items: center;\n         gap: 10px;\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .feedback-widget {\n         width: calc(100% - 35px);\n         right: 0;\n      }\n   }\n</style>";
 
   function _callSuper$1(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct$1() ? Reflect.construct(o, [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
   function _isNativeReflectConstruct$1() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct$1 = function _isNativeReflectConstruct() { return !!t; })(); }
@@ -563,15 +563,16 @@
       _this.attachShadow({
         mode: 'open'
       });
+      _this.widgetId = 'sdg-feedback-widget';
       _this.deviceId = new Date().toISOString();
       _this.buttonId = null;
       _this.isRating = false;
       _this.isText = false;
-      _this.isMinified = true;
+      _this.isMinimize = true;
       _this.isOverlayClose = true;
       _this._isSubmittable = false;
       _this._isSubmit = false;
-      _this._isClosed = true;
+      _this.isOpen = true;
       _this._rating = 0;
       _this._text = '';
       _this.textLengthLimit = 256;
@@ -580,11 +581,9 @@
         _this.getAttributes();
         _this.addLanguageContent();
         _this.listenCloseButton();
-        _this.listenToOverlay();
-        _this.listenToOpen();
-        _this.listenRating();
-        _this.listenTextfield();
+        _this.listenToMinimized();
         _this.listenSubmit();
+        _this.listenToOverlay();
       });
       return _this;
     }
@@ -595,13 +594,8 @@
         return this._rating;
       },
       set: function set(value) {
-        var _this$_text;
         this._rating = value;
-        if (((_this$_text = this._text) === null || _this$_text === void 0 ? void 0 : _this$_text.length) > 0 && this._rating) {
-          this.isSubmittable = true;
-        } else {
-          this.isSubmittable = false;
-        }
+        this.isIsSubmittable();
       }
     }, {
       key: "text",
@@ -609,13 +603,8 @@
         return this._text;
       },
       set: function set(value) {
-        var _this$_text2;
         this._text = value;
-        if (((_this$_text2 = this._text) === null || _this$_text2 === void 0 ? void 0 : _this$_text2.length) > 0 && this._rating) {
-          this.isSubmittable = true;
-        } else {
-          this.isSubmittable = false;
-        }
+        this.isIsSubmittable();
       }
     }, {
       key: "isSubmittable",
@@ -634,22 +623,6 @@
         }
       }
     }, {
-      key: "isClosed",
-      get: function get() {
-        return this._isClosed;
-      },
-      set: function set(value) {
-        this._isClosed = value;
-
-        // add closed class to the widget
-        var widget = this.shadowRoot.querySelector('#widget');
-        if (value) {
-          this.isMinified ? widget.classList.add('minimized') : widget.classList.add('closed');
-        } else {
-          this.isMinified ? widget.classList.remove('minimized') : widget.classList.remove('closed');
-        }
-      }
-    }, {
       key: "isSubmit",
       get: function get() {
         return this._isSubmit;
@@ -658,7 +631,7 @@
         this._isSubmit = value;
 
         // add submit class to the widget
-        var widget = this.shadowRoot.querySelector('#widget');
+        var widget = this.shadowRoot.querySelector("#".concat(this.widgetId));
         if (value) {
           widget.classList.add('submitted');
         } else {
@@ -666,9 +639,75 @@
         }
       }
     }, {
+      key: "isIsSubmittable",
+      value: function isIsSubmittable() {
+        var _this$text, _this$text2;
+        switch (true) {
+          case !this.isText && this.isRating && this.rating > 0:
+            this.isSubmittable = true;
+            break;
+          case !this.isRating && this.isText && ((_this$text = this.text) === null || _this$text === void 0 ? void 0 : _this$text.length) > 0:
+            this.isSubmittable = true;
+            break;
+          case this.isText && this.isRating && this.rating > 0 && ((_this$text2 = this.text) === null || _this$text2 === void 0 ? void 0 : _this$text2.length) > 0:
+            this.isSubmittable = true;
+            break;
+          default:
+            this.isSubmittable = false;
+            break;
+        }
+      }
+
+      // Widget functions
+    }, {
       key: "open",
       value: function open() {
-        this.isClosed = false;
+        this.isOpen = false;
+        this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-open');
+      }
+    }, {
+      key: "close",
+      value: function close() {
+        this.isOpen = true;
+        this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.remove('is-open');
+      }
+    }, {
+      key: "displayMinimize",
+      value: function displayMinimize() {
+        this.isMinimize = false;
+        this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-minimize');
+      }
+    }, {
+      key: "hideMinimize",
+      value: function hideMinimize() {
+        this.isMinimize = true;
+        this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.remove('is-minimize');
+      }
+    }, {
+      key: "displayRating",
+      value: function displayRating() {
+        this.isRating = true;
+        this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-rating');
+        this.listenRating();
+      }
+    }, {
+      key: "hideRating",
+      value: function hideRating() {
+        this.isRating = false;
+        this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.remove('is-rating');
+      }
+    }, {
+      key: "displayText",
+      value: function displayText() {
+        this.isText = true;
+        this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-text');
+        this.listenTextfield();
+      }
+    }, {
+      key: "hideText",
+      value: function hideText() {
+        this.isText = false;
+        this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.remove('is-text');
       }
     }, {
       key: "loadTemplate",
@@ -693,33 +732,35 @@
       key: "getAttributes",
       value: function getAttributes() {
         // get attributes from the element 
-        var buttonId = this.getAttribute('button-id');
-        var isMinified = this.getAttribute('minified');
-        var isRating = this.getAttribute('rating');
-        var isText = this.getAttribute('text');
-        var isClosed = this.getAttribute('closed');
-        var isOverlayClose = this.getAttribute('overlay-close');
-        var isListeningQuery = this.getAttribute('listening-query');
-        console.log('buttonId', buttonId);
-        console.log('isMinified', isMinified);
-        console.log('isRating', isRating);
-        console.log('isText', isText);
-        console.log('isClosed', isClosed);
-        console.log('isOverlayClose', isOverlayClose);
-
-        // set attributes to the element
-        this.buttonId = buttonId;
-        this.isMinified = isMinified === 'true' ? true : this.isMinified;
-        this.isRating = isRating === 'true' ? true : this.isRating;
-        this.isText = isText === 'true' ? true : this.isText;
-        this.isClosed = isClosed === 'true' ? true : this.isClosed;
-        this.isOverlayClose = isOverlayClose === 'true' ? true : this.isOverlayClose;
-        this.isListeningQuery = isListeningQuery === 'true' ? true : false;
+        this.buttonId = this.getAttribute('button-id') || null;
+        this.isMinimize = this.getAttribute('minimize') !== null && this.getAttribute('minimize') !== 'false';
+        this.isRating = this.getAttribute('rating') !== null && this.getAttribute('rating') !== 'false';
+        this.isText = this.getAttribute('text') !== null && this.getAttribute('text') !== 'false';
+        this.isOpen = this.getAttribute('open') !== null && this.getAttribute('open') !== 'false';
+        this.isOverlayClose = this.getAttribute('overlay-close') !== null && this.getAttribute('overlay-close') !== 'false';
+        this.isListeningQuery = this.getAttribute('listening-query') !== null && this.getAttribute('listening-query') !== 'false';
+        this.textLengthLimit = this.getAttribute('text-length-limit') || this.textLengthLimit;
+        this.feedbackUrl = this.getAttribute('feedback-url') || this.feedbackUrl;
 
         // set attributes to the widget
         // minimized
-        if (this.isMinified) {
-          this.shadowRoot.querySelector('#widget').classList.add('minimized');
+        if (this.isMinimize) {
+          this.displayMinimize();
+        }
+
+        // is open
+        if (this.isOpen) {
+          this.open();
+        }
+
+        // is rating
+        if (this.isRating) {
+          this.displayRating();
+        }
+
+        // is text
+        if (this.isText) {
+          this.displayText();
         }
 
         // listening query
@@ -743,16 +784,16 @@
         */
         var urlParams = new URLSearchParams(window.location.search);
         this.buttonId = urlParams.has('sdg-fw-id') ? urlParams.get('sdg-fw-id') : this.buttonId;
-        this.isMinified = urlParams.has('sdg-fw-min') && urlParams.get('sdg-fw-min') === '1';
+        this.isMinimize = urlParams.has('sdg-fw-min') && urlParams.get('sdg-fw-min') === '1';
         this.isRating = urlParams.has('sdg-fw-rating') && urlParams.get('sdg-fw-rating') === '1';
         this.isText = urlParams.has('sdg-fw-text') && urlParams.get('sdg-fw-text') === '1';
-        this.isClosed = !urlParams.has('sdg-fw-open') || urlParams.get('sdg-fw-open') === '0';
+        this.isOpen = !urlParams.has('sdg-fw-open') || urlParams.get('sdg-fw-open') === '0';
         this.isOverlayClose = urlParams.has('sdg-fw-overlay-close') && urlParams.get('sdg-fw-overlay-close') === '1';
 
         // add class to the widget
         // minized
-        if (this.isMinified) {
-          this.shadowRoot.querySelector('#widget').classList.add('minimized');
+        if (this.isMinimize) {
+          this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('minimized');
         }
       }
     }, {
@@ -782,7 +823,7 @@
         var _this2 = this;
         var close = this.shadowRoot.querySelector('#close');
         close.addEventListener('click', function () {
-          _this2.isClosed = true;
+          _this2.close();
         });
       }
     }, {
@@ -792,17 +833,17 @@
         var overlay = this.shadowRoot.querySelector('#overlay');
         overlay.addEventListener('click', function () {
           if (_this3.isOverlayClose) {
-            _this3.isClosed = true;
+            _this3.close();
           }
         });
       }
     }, {
-      key: "listenToOpen",
-      value: function listenToOpen() {
+      key: "listenToMinimized",
+      value: function listenToMinimized() {
         var _this4 = this;
-        var open = this.shadowRoot.querySelector('#open');
+        var open = this.shadowRoot.querySelector('#minimized-feedback');
         open.addEventListener('click', function () {
-          _this4.isClosed = false;
+          _this4.open();
         });
       }
     }, {
@@ -903,7 +944,7 @@
   }(/*#__PURE__*/_wrapNativeSuper(HTMLElement)); // Define the custom element
   customElements.define('sdg-feedback-widget', SDGFeedbackWidget);
 
-  var template = "<div id=\"widget\" class=\"pre-footer-widget\">\n\n   <header>\n      <div id=\"header-title\" class=\"title\"></div>\n   </header>\n\n   <main>\n      <div class=\"button-list\">\n         <!-- Chat -->\n         <div id=\"chat-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/conversation.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Phone -->\n         <div id=\"phone-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/phone.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Contact -->\n         <div id=\"contact-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/message.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Appointlent -->\n         <div id=\"appointment-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/calendar.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Office -->\n         <div id=\"office-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/location.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n      </div>\n\n      <div id=\"info-text\" class=\"info-text\"></div>\n   </main>\n</div>\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n   }\n\n   .pre-footer-widget {\n      display: flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: flex-start;\n      gap: 32px;\n      width: 100%;\n      padding: 50px 120px;\n\n      header {\n         display: flex;\n         flex-direction: row;\n         align-items: center;\n         justify-content: flex-start;\n         gap: 10px;\n         width: 100%;\n\n         .title {\n            font-family: 'Barlow', sans-serif;\n            font-weight: 600;\n            font-size: 32px;\n            line-height: 40px;\n            color: #2B2D42;\n         }\n      }\n\n      main {\n         display: flex;\n         flex-direction: column;\n         gap: 24px;\n         background-color: var(--color-light-gray);\n         border-radius: 10px;\n         box-shadow: 0 0 10px var(--color-shadow);\n\n         .button-list {\n            display: flex;\n            flex-direction: row;\n            flex-wrap: wrap;\n            gap: 24px;\n\n            .assistance-button {\n               display: none;\n               flex-direction: row;\n               justify-content: space-between;\n               padding: 10px 24px;\n               background: white;\n               border: 2px solid #006F9E;\n               border-radius: 8px;\n               cursor: pointer;\n               width: 279px;\n               height: 80px;\n               transition: .1s;\n\n               &:hover {\n                  background-color: #DAF2FC;\n               }\n\n               &:active {\n                  background-color: #B6E8FF;\n               }\n            }\n\n            .left {\n               display: flex;\n               align-items: start;\n               justify-content: center;\n               gap: 12px;\n               padding: 10px 0;\n\n               .icon {\n                  padding: 5px 0;\n\n                  img {\n                     width: 28px;\n                     height: 28px;\n                  }\n               }\n\n               .content {\n                  display: flex;\n                  flex-direction: column;\n                  justify-content: center;\n                  align-items: flex-start;\n                  padding: 10px 0;\n                  gap: 5px;\n\n                  .title {\n                     font-family: 'Barlow', sans-serif;\n                     font-weight: 700;\n                     font-size: 18px;\n                     line-height: 24px;\n                     color: var(--color-dark-blue);\n                  }\n\n                  .description {\n                     font-family: \"Roboto\", sans-serif;\n                     font-size: 14px;\n                     line-height: 20px;\n                     font-weight: 400;\n                     color: var(--color-gray);\n                  }\n               }\n            }\n\n            .right {\n               display: flex;\n               align-items: center;\n               justify-content: center;\n\n               img {\n                  width: 16px;\n                  height: 16px;\n               }\n            }\n         }\n\n         .info-text {\n            font-family: \"Roboto\", sans-serif;\n            font-weight: 400;\n            font-size: 16px;\n            line-height: 22px;\n            color: #474A5E;\n         }\n      }\n\n\n      &.is-chat {\n         #chat-button {\n            display: flex;\n         }\n      }\n\n      &.is-phone {\n         #phone-button {\n            display: flex;\n         }\n      }\n\n      &.is-contact {\n         #contact-button {\n            display: flex;\n         }\n      }\n\n      &.is-appointment {\n         #appointment-button {\n            display: flex;\n         }\n      }\n\n      &.is-office {\n         #office-button {\n            display: flex;\n         }\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .pre-footer-widget {}\n   }\n</style>";
+  var template = "<div id=\"widget\" class=\"pre-footer-widget\">\n\n   <header>\n      <div id=\"header-title\" class=\"title\"></div>\n   </header>\n\n   <main>\n      <div class=\"button-list\">\n         <!-- Chat -->\n         <div id=\"chat-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/conversation.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Phone -->\n         <div id=\"phone-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/phone.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Contact -->\n         <div id=\"contact-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/message.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Appointlent -->\n         <div id=\"appointment-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/calendar.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Office -->\n         <div id=\"office-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/location.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n      </div>\n\n      <div id=\"info-text\" class=\"info-text\"></div>\n   </main>\n</div>\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n   }\n\n   .pre-footer-widget {\n      display: flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: flex-start;\n      gap: 32px;\n      padding: 50px 120px;\n      background: white;\n\n      header {\n         display: flex;\n         flex-direction: row;\n         align-items: center;\n         justify-content: flex-start;\n         gap: 10px;\n         width: 100%;\n\n         .title {\n            font-family: 'Barlow', sans-serif;\n            font-weight: 600;\n            font-size: 32px;\n            line-height: 40px;\n            color: #2B2D42;\n         }\n      }\n\n      main {\n         display: flex;\n         flex-direction: column;\n         gap: 24px;\n         background-color: var(--color-light-gray);\n         border-radius: 10px;\n         box-shadow: 0 0 10px var(--color-shadow);\n\n         .button-list {\n            display: flex;\n            flex-direction: row;\n            flex-wrap: wrap;\n            gap: 24px;\n\n            .assistance-button {\n               display: none;\n               flex-direction: row;\n               justify-content: space-between;\n               padding: 10px 24px;\n               background: white;\n               border: 2px solid #006F9E;\n               border-radius: 8px;\n               cursor: pointer;\n               width: 279px;\n               height: 80px;\n               transition: .1s;\n\n               &:hover {\n                  background-color: #DAF2FC;\n               }\n\n               &:active {\n                  background-color: #B6E8FF;\n               }\n            }\n\n            .left {\n               display: flex;\n               align-items: start;\n               justify-content: center;\n               gap: 12px;\n               padding: 10px 0;\n\n               .icon {\n                  padding: 5px 0;\n\n                  img {\n                     width: 28px;\n                     height: 28px;\n                  }\n               }\n\n               .content {\n                  display: flex;\n                  flex-direction: column;\n                  justify-content: center;\n                  align-items: flex-start;\n                  padding: 10px 0;\n                  gap: 5px;\n\n                  .title {\n                     font-family: 'Barlow', sans-serif;\n                     font-weight: 700;\n                     font-size: 18px;\n                     line-height: 24px;\n                     color: var(--color-dark-blue);\n                  }\n\n                  .description {\n                     font-family: \"Roboto\", sans-serif;\n                     font-size: 14px;\n                     line-height: 20px;\n                     font-weight: 400;\n                     color: var(--color-gray);\n                  }\n               }\n            }\n\n            .right {\n               display: flex;\n               align-items: center;\n               justify-content: center;\n\n               img {\n                  width: 16px;\n                  height: 16px;\n               }\n            }\n         }\n\n         .info-text {\n            font-family: \"Roboto\", sans-serif;\n            font-weight: 400;\n            font-size: 16px;\n            line-height: 22px;\n            color: #474A5E;\n         }\n      }\n\n\n      &.is-chat {\n         #chat-button {\n            display: flex;\n         }\n      }\n\n      &.is-phone {\n         #phone-button {\n            display: flex;\n         }\n      }\n\n      &.is-contact {\n         #contact-button {\n            display: flex;\n         }\n      }\n\n      &.is-appointment {\n         #appointment-button {\n            display: flex;\n         }\n      }\n\n      &.is-office {\n         #office-button {\n            display: flex;\n         }\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .pre-footer-widget {}\n   }\n</style>";
 
   function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
   function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
