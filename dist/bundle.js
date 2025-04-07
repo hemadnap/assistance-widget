@@ -613,14 +613,6 @@
       },
       set: function set(value) {
         this._isSubmittable = value;
-
-        // disable or enable the submit button
-        var submit = this.shadowRoot.querySelector('#submit');
-        if (value) {
-          submit.removeAttribute('disabled');
-        } else {
-          submit.setAttribute('disabled', true);
-        }
       }
     }, {
       key: "isSubmit",

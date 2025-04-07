@@ -86,14 +86,6 @@ class SDGFeedbackWidget extends HTMLElement {
 
    set isSubmittable (value) {
       this._isSubmittable = value;
-
-      // disable or enable the submit button
-      const submit = this.shadowRoot.querySelector('#submit');
-      if (value) {
-         submit.removeAttribute('disabled');
-      } else {
-         submit.setAttribute('disabled', true);
-      }
    }
 
    get isSubmit () {
