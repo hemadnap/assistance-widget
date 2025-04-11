@@ -521,7 +521,7 @@
   var regeneratorExports = requireRegenerator();
   var _regeneratorRuntime = /*@__PURE__*/getDefaultExportFromCjs(regeneratorExports);
 
-  var template$1 = "<div id=\"sdg-feedback-widget\" class=\"sdg-feedback-widget\">\n   <!-- Closed feedback widget -->\n   <div id=\"minimized-feedback\" class=\"minimized-feedback\">\n      Feedback widget\n   </div>\n\n   <!-- Open feedback widget -->\n   <div class=\"feedback-widget\">\n      <!-- Header -->\n      <header>\n         <div id=\"title\" class=\"title\"></div>\n\n         <a id=\"close\" class=\"close\">\n            <img src=\"./assets/icons/close.svg\" alt=\"Close\">\n         </a>\n      </header>\n\n      <main>\n         <div class=\"form\">\n            <!-- Rating -->\n            <div class=\"rating\">\n               <div id=\"rating-label\" class=\"label\"></div>\n               <input type=\"text\" id=\"rating-value\" hidden>\n               <div class=\"rates\">\n                  <a id=\"rate-1\" class=\"rate\">\n                     <img src=\"./assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">1</span>\n                  </a>\n                  <a id=\"rate-2\" class=\"rate\">\n                     <img src=\"./assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">2</span>\n                  </a>\n                  <a id=\"rate-3\" class=\"rate\">\n                     <img src=\"./assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">3</span>\n                  </a>\n                  <a id=\"rate-4\" class=\"rate\">\n                     <img src=\"./assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">4</span>\n                  </a>\n                  <a id=\"rate-5\" class=\"rate\">\n                     <img src=\"./assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">5</span>\n                  </a>\n               </div>\n            </div>\n\n            <!-- Text -->\n            <div class=\"text\">\n               <div id=\"text-label\" class=\"label\"></div>\n               <div id=\"text-component\" class=\"text-component\">\n                  <textarea id=\"text-value\"></textarea>\n                  <div id=\"text-info\" class=\"text-info\"></div>\n               </div>\n            </div>\n\n            <!-- Submit -->\n            <button id=\"submit\"></button>\n         </div>\n\n         <!-- Submitted message -->\n         <div id=\"submitted-message\" class=\"submitted-message\"></div>\n      </main>\n   </div>\n\n   <!-- Overlay -->\n   <div id=\"overlay\" class=\"overlay\"></div>\n</div>\n\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n      --color-overlay: #bfc0c6;\n      --color-error: #d4003c;\n   }\n\n   .sdg-feedback-widget {\n      z-index: 1000;\n\n      .overlay {\n         display: none;\n         position: fixed;\n         top: 0;\n         left: 0;\n         width: 100%;\n         height: 100%;\n         background: #0203067A;\n         ;\n         z-index: 999;\n      }\n\n      .minimized-feedback {\n         display: none;\n         justify-content: center;\n         align-items: center;\n         cursor: pointer;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         padding: 5px 10px;\n         background: #6EC8F2;\n         border: 2px solid #006F9E !important;\n         border-top-right-radius: 8px;\n         border-top-left-radius: 8px;\n         font-family: \"Barlow\", sans-serif;\n         font-size: 18px;\n         line-height: 28px;\n         font-weight: 400;\n         vertical-align: middle;\n         cursor: pointer;\n         z-index: 1000;\n         transition: .1s;\n\n         &:hover {\n            background: #DAF2FC;\n         }\n      }\n\n      .feedback-widget {\n         display: none;\n         flex-direction: column;\n         align-items: center;\n         justify-content: center;\n         gap: 10px;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         width: 400px;\n         background: #FFFFFF;\n         padding: 10px;\n         box-shadow: 0px 4px 16px #0C0F1E1A;\n         border-top-left-radius: 16px;\n         border-top-right-radius: 16px;\n         color: #2B2D42;\n         padding: 16px;\n         z-index: 1000;\n\n         &.is-open {\n            display: flex;\n         }\n\n\n         /* Header */\n         header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            width: 100%;\n\n            .title {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 22px;\n               line-height: 28px;\n               font-weight: 600;\n               vertical-align: middle;\n               width: 100%;\n            }\n\n            .close {\n               display: flex;\n               justify-content: center;\n               align-items: center;\n               cursor: pointer;\n               transition: .1s;\n               padding: 3px;\n               border-radius: 4px;\n\n               &:hover {\n                  background: #F5F5F5;\n               }\n            }\n         }\n\n\n         /* Main */\n         main,\n         .form {\n            display: flex;\n            flex-direction: column;\n            gap: 10px;\n            width: 100%;\n\n            .label {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 24px;\n               font-weight: 700;\n               width: 100%;\n            }\n\n            /* Rating */\n            .rating {\n               display: none;\n               flex-direction: column;\n               align-items: start;\n               gap: 20px;\n               margin: 10px 0;\n               width: 100%;\n\n               .rates {\n                  display: flex;\n                  gap: 8px;\n                  width: 100%;\n\n                  .rate {\n                     display: flex;\n                     flex-direction: column;\n                     align-items: center;\n                     gap: 5px;\n                     cursor: pointer;\n                     position: relative;\n                     width: 40px;\n                     height: 40px;\n\n                     * {\n                        position: absolute;\n                     }\n\n                     .value {\n                        font-family: \"Barlow\", sans-serif;\n                        font-size: 14px;\n                        line-height: 28px;\n                        font-weight: 600;\n                        padding-top: 8px;\n                     }\n\n                     img {\n                        content: url('./assets/icons/star.svg');\n                        background-size: cover;\n                        width: 40px;\n                     }\n\n                     &:hover img {\n                        content: url('./assets/icons/star-hover.svg');\n                     }\n\n                     &.active img {\n                        content: url('./assets/icons/star-active.svg');\n                     }\n                  }\n               }\n            }\n\n            /* Text */\n            .text {\n               display: none;\n               flex-direction: column;\n               align-items: start;\n               gap: 10px;\n               width: 100%;\n\n               .text-component {\n                  display: flex;\n                  flex-direction: column;\n                  align-items: start;\n                  gap: 2px;\n                  width: 100%;\n\n                  textarea {\n                     height: 100px;\n                     border: 2px solid #6D6E83;\n                     border-radius: 4px;\n                     width: 100%;\n                     max-width: calc(100% - 5px);\n                     resize: vertical;\n                     outline: none;\n                  }\n\n                  .text-info {\n                     font-family: \"Barlow\", sans-serif;\n                     font-size: 14px;\n                     line-height: 24px;\n                     font-weight: 400;\n                     color: #6D6E83;\n                  }\n\n                  &.error {\n                     textarea {\n                        border: 2px solid #d4003c;\n                     }\n\n                     .text-info {\n                        color: #d4003c;\n                     }\n                  }\n               }\n            }\n\n            /* Submit */\n            button {\n               width: 100%;\n               height: 48px;\n               padding: 10px 20px;\n               background: #6EC8F2;\n               border: 2px solid #006F9E !important;\n               color: #2B2D42;\n               border: none;\n               border-radius: 8px;\n               cursor: pointer;\n               margin-top: 30px;\n               transition: .1s;\n               font-family: \"Roboto\", sans-serif;\n               font-size: 16px;\n               line-height: 24px;\n               font-weight: 600;\n\n               &:hover {\n                  background: #DAF2FC;\n               }\n\n               &:disabled {\n                  opacity: .6;\n                  cursor: inherit;\n\n                  &:hover {\n                     background: #6EC8F2;\n                  }\n\n               }\n            }\n\n            .submitted-message {\n               display: none;\n               justify-content: center;\n               align-items: center;\n               gap: 10px;\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 28px;\n               font-weight: 400;\n               color: #2B2D42;\n               padding: 50px 0;\n            }\n         }\n      }\n\n      /* Minimized widget */\n      &.is-minimize {\n         .overlay {\n            display: none;\n         }\n\n         .minimized-feedback {\n            display: flex;\n         }\n\n         .feedback-widget {\n            display: none;\n         }\n      }\n\n      /* Open widget */\n      &.is-open {\n         .overlay {\n            display: flex;\n         }\n\n         .minimized-feedback {\n            display: none;\n         }\n\n         .feedback-widget {\n            display: flex;\n         }\n      }\n\n      /* is text */\n      &.is-text {\n        .form .text {\n            display: flex;\n         }\n      }\n\n      /* is rating */\n      &.is-rating {\n        .form .rating {\n            display: flex;\n         }\n      }\n\n   }\n\n   /* Sumbit content */\n   .submitted main {\n      .form {\n         display: none;\n      }\n\n      .submitted-message {\n         display: flex;\n         flex-direction: column;\n         align-items: center;\n         gap: 10px;\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .feedback-widget {\n         width: calc(100% - 35px);\n         right: 0;\n      }\n   }\n</style>";
+  var template$1 = "<div id=\"sdg-feedback-widget\" class=\"sdg-feedback-widget\">\n   <!-- Closed feedback widget -->\n   <div id=\"minimized-feedback\" class=\"minimized-feedback\">\n      Feedback widget\n   </div>\n\n   <!-- Open feedback widget -->\n   <div class=\"feedback-widget\">\n      <!-- Header -->\n      <header>\n         <div id=\"title\" class=\"title\"></div>\n\n         <a id=\"close\" class=\"close\">\n            <img src=\"./src/assets/icons/close.svg\" alt=\"Close\">\n         </a>\n      </header>\n\n      <main>\n         <div class=\"form\">\n            <!-- Rating -->\n            <div class=\"rating\">\n               <div id=\"rating-label\" class=\"label\"></div>\n               <input type=\"text\" id=\"rating-value\" hidden>\n               <div class=\"rates\">\n                  <a id=\"rate-1\" class=\"rate\">\n                     <img src=\"./src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">1</span>\n                  </a>\n                  <a id=\"rate-2\" class=\"rate\">\n                     <img src=\"./src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">2</span>\n                  </a>\n                  <a id=\"rate-3\" class=\"rate\">\n                     <img src=\"./src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">3</span>\n                  </a>\n                  <a id=\"rate-4\" class=\"rate\">\n                     <img src=\"./src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">4</span>\n                  </a>\n                  <a id=\"rate-5\" class=\"rate\">\n                     <img src=\"./src/assets/icons/star.svg\" alt=\"\">\n                     <span class=\"value\">5</span>\n                  </a>\n               </div>\n            </div>\n\n            <!-- Text -->\n            <div class=\"text\">\n               <div id=\"text-label\" class=\"label\"></div>\n               <div id=\"text-component\" class=\"text-component\">\n                  <textarea id=\"text-value\"></textarea>\n                  <div id=\"text-info\" class=\"text-info\"></div>\n               </div>\n            </div>\n\n            <!-- Submit -->\n            <button id=\"submit\" disabled=\"disabled\"></button>\n         </div>\n\n         <!-- Submitted message -->\n         <div id=\"submitted-message\" class=\"submitted-message\"></div>\n      </main>\n   </div>\n\n   <!-- Overlay -->\n   <div id=\"overlay\" class=\"overlay\"></div>\n</div>\n\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n      --color-overlay: #bfc0c6;\n      --color-error: #d4003c;\n   }\n\n   .sdg-feedback-widget {\n      z-index: 1000;\n\n      .overlay {\n         display: none;\n         position: fixed;\n         top: 0;\n         left: 0;\n         width: 100%;\n         height: 100%;\n         background: #0203067A;\n         ;\n         z-index: 999;\n      }\n\n      .minimized-feedback {\n         display: none;\n         justify-content: center;\n         align-items: center;\n         cursor: pointer;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         padding: 5px 10px;\n         background: #6EC8F2;\n         border: 2px solid #006F9E !important;\n         border-top-right-radius: 8px;\n         border-top-left-radius: 8px;\n         font-family: \"Barlow\", sans-serif;\n         font-size: 18px;\n         line-height: 28px;\n         font-weight: 400;\n         vertical-align: middle;\n         cursor: pointer;\n         z-index: 1000;\n         transition: .1s;\n\n         &:hover {\n            background: #DAF2FC;\n         }\n      }\n\n      .feedback-widget {\n         display: none;\n         flex-direction: column;\n         align-items: center;\n         justify-content: center;\n         gap: 10px;\n         position: fixed;\n         bottom: 0;\n         right: 50px;\n         width: 400px;\n         background: #FFFFFF;\n         padding: 10px;\n         box-shadow: 0px 4px 16px #0C0F1E1A;\n         border-top-left-radius: 16px;\n         border-top-right-radius: 16px;\n         color: #2B2D42;\n         padding: 16px;\n         z-index: 1000;\n\n         &.is-open {\n            display: flex;\n         }\n\n\n         /* Header */\n         header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            width: 100%;\n\n            .title {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 22px;\n               line-height: 28px;\n               font-weight: 600;\n               vertical-align: middle;\n               width: 100%;\n            }\n\n            .close {\n               display: flex;\n               justify-content: center;\n               align-items: center;\n               cursor: pointer;\n               transition: .1s;\n               padding: 3px;\n               border-radius: 4px;\n\n               &:hover {\n                  background: #F5F5F5;\n               }\n            }\n         }\n\n\n         /* Main */\n         main,\n         .form {\n            display: flex;\n            flex-direction: column;\n            gap: 10px;\n            width: 100%;\n\n            .label {\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 24px;\n               font-weight: 700;\n               width: 100%;\n            }\n\n            /* Rating */\n            .rating {\n               display: none;\n               flex-direction: column;\n               align-items: start;\n               gap: 20px;\n               margin: 10px 0;\n               width: 100%;\n\n               .rates {\n                  display: flex;\n                  gap: 8px;\n                  width: 100%;\n\n                  .rate {\n                     display: flex;\n                     flex-direction: column;\n                     align-items: center;\n                     gap: 5px;\n                     cursor: pointer;\n                     position: relative;\n                     width: 40px;\n                     height: 40px;\n\n                     * {\n                        position: absolute;\n                     }\n\n                     .value {\n                        font-family: \"Barlow\", sans-serif;\n                        font-size: 14px;\n                        line-height: 28px;\n                        font-weight: 600;\n                        padding-top: 8px;\n                     }\n\n                     img {\n                        content: url('./src/assets/icons/star.svg');\n                        background-size: cover;\n                        width: 40px;\n                     }\n\n                     &:hover img {\n                        content: url('./src/assets/icons/star-hover.svg');\n                     }\n\n                     &.active img {\n                        content: url('./src/assets/icons/star-active.svg');\n                     }\n                  }\n               }\n            }\n\n            /* Text */\n            .text {\n               display: none;\n               flex-direction: column;\n               align-items: start;\n               gap: 10px;\n               width: 100%;\n\n               .text-component {\n                  display: flex;\n                  flex-direction: column;\n                  align-items: start;\n                  gap: 2px;\n                  width: 100%;\n\n                  textarea {\n                     height: 100px;\n                     border: 2px solid #6D6E83;\n                     border-radius: 4px;\n                     width: 100%;\n                     max-width: calc(100% - 5px);\n                     resize: vertical;\n                     outline: none;\n                  }\n\n                  .text-info {\n                     font-family: \"Barlow\", sans-serif;\n                     font-size: 14px;\n                     line-height: 24px;\n                     font-weight: 400;\n                     color: #6D6E83;\n                  }\n\n                  &.error {\n                     textarea {\n                        border: 2px solid #d4003c;\n                     }\n\n                     .text-info {\n                        color: #d4003c;\n                     }\n                  }\n               }\n            }\n\n            /* Submit */\n            button {\n               width: 100%;\n               height: 48px;\n               padding: 10px 20px;\n               background: #6EC8F2;\n               border: 2px solid #006F9E !important;\n               color: #2B2D42;\n               border: none;\n               border-radius: 8px;\n               cursor: pointer;\n               margin-top: 30px;\n               transition: .1s;\n               font-family: \"Roboto\", sans-serif;\n               font-size: 16px;\n               line-height: 24px;\n               font-weight: 600;\n\n               &:hover {\n                  background: #DAF2FC;\n               }\n\n               &:disabled {\n                  opacity: .6;\n                  cursor: inherit;\n\n                  &:hover {\n                     background: #6EC8F2;\n                  }\n\n               }\n            }\n\n            .submitted-message {\n               display: none;\n               justify-content: center;\n               align-items: center;\n               gap: 10px;\n               font-family: \"Barlow\", sans-serif;\n               font-size: 18px;\n               line-height: 28px;\n               font-weight: 400;\n               color: #2B2D42;\n               padding: 50px 0;\n            }\n         }\n      }\n\n      /* Minimized widget */\n      &.is-minimize {\n         .overlay {\n            display: none;\n         }\n\n         .minimized-feedback {\n            display: flex;\n         }\n\n         .feedback-widget {\n            display: none;\n         }\n      }\n\n      /* Open widget */\n      &.is-open {\n         .overlay {\n            display: flex;\n         }\n\n         .minimized-feedback {\n            display: none;\n         }\n\n         .feedback-widget {\n            display: flex;\n         }\n      }\n\n      /* is text */\n      &.is-text {\n        .form .text {\n            display: flex;\n         }\n      }\n\n      /* is rating */\n      &.is-rating {\n        .form .rating {\n            display: flex;\n         }\n      }\n\n   }\n\n   /* Sumbit content */\n   .submitted main {\n      .form {\n         display: none;\n      }\n\n      .submitted-message {\n         display: flex;\n         flex-direction: column;\n         align-items: center;\n         gap: 10px;\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .feedback-widget {\n         width: calc(100% - 35px);\n         right: 0;\n      }\n   }\n</style>";
 
   function _callSuper$1(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct$1() ? Reflect.construct(o, [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
   function _isNativeReflectConstruct$1() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct$1 = function _isNativeReflectConstruct() { return !!t; })(); }
@@ -653,7 +653,7 @@
             this.isSubmittable = true;
             break;
           default:
-            this.isSubmittable = true;
+            this.isSubmittable = false;
             break;
         }
       }
@@ -944,7 +944,7 @@
   }(/*#__PURE__*/_wrapNativeSuper(HTMLElement)); // Define the custom element
   customElements.define('sdg-feedback-widget', SDGFeedbackWidget);
 
-  var template = "<div id=\"widget\" class=\"pre-footer-widget\">\n\n   <header>\n      <div id=\"header-title\" class=\"title\"></div>\n   </header>\n\n   <main>\n      <div class=\"button-list\">\n         <!-- Chat -->\n         <div id=\"chat-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"./assets/icons/conversation.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"./assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Phone -->\n         <div id=\"phone-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"./assets/icons/phone.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"./assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Contact -->\n         <div id=\"contact-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"./assets/icons/message.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"./assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Appointlent -->\n         <div id=\"appointment-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"./assets/icons/calendar.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"./assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Office -->\n         <div id=\"office-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"./assets/icons/location.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"description\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"./assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n      </div>\n\n      <div id=\"info-text\" class=\"info-text\"></div>\n   </main>\n</div>\n\n<style lang=\"scss\" scoped>\n   :root {\n      --color-blue: #6EC8F2;\n      --color-dark-blue: #006F9E;\n      --color-black: #2B2D42;\n      --color-gray: #6D6E83;\n      --color-shadow: #0C0F1E1A;\n      --color-background: #FFFFFF;\n      --color-light-gray: #F5F5F5;\n   }\n\n   .pre-footer-widget {\n      display: flex;\n      flex-direction: column;\n      align-items: flex-start;\n      justify-content: flex-start;\n      gap: 32px;\n      padding: 50px 120px;\n      background: white;\n\n      header {\n         display: flex;\n         flex-direction: row;\n         align-items: center;\n         justify-content: flex-start;\n         gap: 10px;\n         width: 100%;\n\n         .title {\n            font-family: 'Barlow', sans-serif;\n            font-weight: 600;\n            font-size: 32px;\n            line-height: 40px;\n            color: #2B2D42;\n         }\n      }\n\n      main {\n         display: flex;\n         flex-direction: column;\n         gap: 24px;\n         background-color: var(--color-light-gray);\n         border-radius: 10px;\n         box-shadow: 0 0 10px var(--color-shadow);\n\n         .button-list {\n            display: flex;\n            flex-direction: row;\n            flex-wrap: wrap;\n            gap: 24px;\n\n            .assistance-button {\n               display: none;\n               flex-direction: row;\n               justify-content: space-between;\n               padding: 10px 24px;\n               background: white;\n               border: 2px solid #006F9E;\n               border-radius: 8px;\n               cursor: pointer;\n               width: 279px;\n               height: 80px;\n               transition: .1s;\n\n               &:hover {\n                  background-color: #DAF2FC;\n               }\n\n               &:active {\n                  background-color: #B6E8FF;\n               }\n            }\n\n            .left {\n               display: flex;\n               align-items: start;\n               justify-content: center;\n               gap: 12px;\n               padding: 10px 0;\n\n               .icon {\n                  padding: 5px 0;\n\n                  img {\n                     width: 28px;\n                     height: 28px;\n                  }\n               }\n\n               .content {\n                  display: flex;\n                  flex-direction: column;\n                  justify-content: center;\n                  align-items: flex-start;\n                  padding: 10px 0;\n                  gap: 5px;\n\n                  .title {\n                     font-family: 'Barlow', sans-serif;\n                     font-weight: 700;\n                     font-size: 18px;\n                     line-height: 24px;\n                     color: var(--color-dark-blue);\n                  }\n\n                  .description {\n                     font-family: \"Roboto\", sans-serif;\n                     font-size: 14px;\n                     line-height: 20px;\n                     font-weight: 400;\n                     color: var(--color-gray);\n                  }\n               }\n            }\n\n            .right {\n               display: flex;\n               align-items: center;\n               justify-content: center;\n\n               img {\n                  width: 16px;\n                  height: 16px;\n               }\n            }\n         }\n\n         .info-text {\n            font-family: \"Roboto\", sans-serif;\n            font-weight: 400;\n            font-size: 16px;\n            line-height: 22px;\n            color: #474A5E;\n         }\n      }\n\n\n      &.is-chat {\n         #chat-button {\n            display: flex;\n         }\n      }\n\n      &.is-phone {\n         #phone-button {\n            display: flex;\n         }\n      }\n\n      &.is-contact {\n         #contact-button {\n            display: flex;\n         }\n      }\n\n      &.is-appointment {\n         #appointment-button {\n            display: flex;\n         }\n      }\n\n      &.is-office {\n         #office-button {\n            display: flex;\n         }\n      }\n   }\n\n   /* Mobile breakpoint */\n   @media (max-width: 768px) {\n      .pre-footer-widget {}\n   }\n</style>\n";
+  var template = "<div id=\"widget\" class=\"pre-footer-widget\">\n\n   <header>\n      <div id=\"header-title\" class=\"title\"></div>\n   </header>\n\n   <main>\n      <div class=\"button-list\">\n         <!-- Chat -->\n         <div id=\"chat-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon conversation\">\n                  <img src=\"/src/assets/icons/conversation.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"text\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Phone -->\n         <div id=\"phone-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon phone\">\n                  <img src=\"/src/assets/icons/phone.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"text\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Contact -->\n         <div id=\"contact-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/message.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"text\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Appointlent -->\n         <div id=\"appointment-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/calendar.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"text\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n\n         <!-- Office -->\n         <div id=\"office-button\" class=\"assistance-button\">\n            <div class=\"left\">\n               <div class=\"icon\">\n                  <img src=\"/src/assets/icons/location.svg\" alt=\"\">\n               </div>\n               <div class=\"content\">\n                  <div class=\"title\"></div>\n                  <div class=\"text\"></div>\n               </div>\n            </div>\n            <div class=\"right\">\n               <img src=\"/src/assets/icons/chevron-right.svg\" alt=\"\">\n            </div>\n         </div>\n      </div>\n\n      <div id=\"info-text\" class=\"info-text\"></div>\n   </main>\n\n   <div id=\"modal\" class=\"modal\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n         <div class=\"header\">\n            <div id=\"modal-title\" class=\"title\"></div>\n            <a id=\"close-modal\" class=\"close\" href=\"#\" onclick=\"document.getElementById('modal').classList.remove('active');\">\n               <img src=\"/src/assets/icons/close.svg\" alt=\"\">\n            </a>\n            \n\n         </div>\n         <div id=\"modal-content\" class=\"content\">\n\n         </div>\n      </div>\n   </div>\n\n   <style lang=\"scss\" scoped>\n      :root {\n         --color-blue: #6EC8F2;\n         --color-dark-blue: #006F9E;\n         --color-black: #2B2D42;\n         --color-gray: #6D6E83;\n         --color-shadow: #0C0F1E1A;\n         --color-background: #FFFFFF;\n         --color-light-gray: #F5F5F5;\n      }\n\n      .pre-footer-widget {\n         display: flex;\n         flex-direction: column;\n         align-items: flex-start;\n         justify-content: flex-start;\n         gap: 32px;\n         padding: 50px 120px;\n         background: white;\n\n         header {\n            display: flex;\n            flex-direction: row;\n            align-items: center;\n            justify-content: flex-start;\n            gap: 10px;\n            width: 100%;\n\n            .title {\n               font-family: 'Barlow', sans-serif;\n               font-weight: 600;\n               font-size: 32px;\n               line-height: 40px;\n               color: #2B2D42;\n            }\n         }\n\n         main {\n            display: flex;\n            flex-direction: column;\n            gap: 24px;\n            background-color: var(--color-light-gray);\n            border-radius: 10px;\n            box-shadow: 0 0 10px var(--color-shadow);\n\n            .button-list {\n               display: flex;\n               flex-direction: row;\n               flex-wrap: wrap;\n               gap: 24px;\n\n               .assistance-button {\n                  display: none;\n                  flex-direction: row;\n                  justify-content: space-between;\n                  padding: 10px 24px;\n                  background: white;\n                  border: 2px solid #006F9E;\n                  border-radius: 8px;\n                  cursor: pointer;\n                  width: 279px;\n                  height: 80px;\n                  transition: .1s;\n\n                  &:hover {\n                     background-color: #DAF2FC;\n                  }\n\n                  &:active {\n                     background-color: #B6E8FF;\n                  }\n               }\n\n               .left {\n                  display: flex;\n                  align-items: start;\n                  justify-content: center;\n                  gap: 12px;\n                  padding: 10px 0;\n\n                  .icon {\n                     padding: 5px 0;\n\n                     img {\n                        width: 28px;\n                        height: 28px;\n                     }\n                  }\n\n                  .content {\n                     display: flex;\n                     flex-direction: column;\n                     justify-content: center;\n                     align-items: flex-start;\n                     padding: 10px 0;\n                     gap: 5px;\n\n                     .title {\n                        font-family: 'Barlow', sans-serif;\n                        font-weight: 700;\n                        font-size: 18px;\n                        line-height: 24px;\n                        color: var(--color-dark-blue);\n                     }\n\n                     .text {\n                        font-family: \"Roboto\", sans-serif;\n                        font-size: 14px;\n                        line-height: 20px;\n                        font-weight: 400;\n                        color: var(--color-gray);\n                     }\n                  }\n               }\n\n               .right {\n                  display: flex;\n                  align-items: center;\n                  justify-content: center;\n\n                  img {\n                     width: 16px;\n                     height: 16px;\n                  }\n               }\n            }\n\n            .info-text {\n               font-family: \"Roboto\", sans-serif;\n               font-weight: 400;\n               font-size: 16px;\n               line-height: 22px;\n               color: #474A5E;\n            }\n         }\n\n\n         &.is-chat {\n            #chat-button {\n               display: flex;\n            }\n         }\n\n         &.is-phone {\n            #phone-button {\n               display: flex;\n            }\n         }\n\n         &.is-contact {\n            #contact-button {\n               display: flex;\n            }\n         }\n\n         &.is-appointment {\n            #appointment-button {\n               display: flex;\n            }\n         }\n\n         &.is-office {\n            #office-button {\n               display: flex;\n            }\n         }\n      }\n\n      .modal {\n         display: none;\n         position: fixed;\n         z-index: 1;\n         left: 0;\n         top: 0;\n         width: 100vw;\n         height: 100vh;\n\n         &.active {\n            display: flex;\n         }\n\n         .overlay {\n            position: fixed;\n            z-index: 1;\n            left: 0;\n            top: 0;\n            width: 100%;\n            height: 100%;\n            background-color: rgba(0, 0, 0, 0.4);\n         }\n\n         .container {\n            position: absolute;\n            z-index: 2;\n            left: 50%;\n            top: 50%;\n            transform: translate(-50%, -50%);\n            background: white;\n            padding: 20px;\n            border-radius: 10px;\n            box-shadow: 0 0 10px var(--color-shadow);\n            width: 400px;\n\n            .header {\n               display: flex;\n               flex-direction: row;\n               align-items: center;\n               justify-content: space-between;\n               padding: 10px 0;\n\n               .title {\n                  font-family: 'Montserrat', sans-serif;\n                  font-weight: 600;\n                  font-size: 28px;\n                  line-height: 32px;\n                  color: #09181B;\n               }\n\n               .close {\n                  position: absolute;\n                  top: 10px;\n                  right: 20px;\n                  font-size: 24px;\n                  cursor: pointer;\n               }\n            }\n\n            .content {}\n         }\n      }\n\n      /* Mobile breakpoint */\n      @media (max-width: 768px) {\n         .pre-footer-widget {}\n      }\n   </style></div>";
 
   function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
   function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
@@ -966,10 +966,6 @@
         },
         appointment: {
           title: 'By appointment',
-          text: 'Available until 4pm.'
-        },
-        office: {
-          title: 'Our offices',
           text: 'Available until 4pm.'
         }
       },
@@ -993,10 +989,6 @@
         appointment: {
           title: 'Op afspraak',
           text: 'Beschikbaar tot 16u.'
-        },
-        office: {
-          title: 'Onze kantoren',
-          text: 'Beschikbaar tot 16u.'
         }
       },
       info: 'Onze collega’s van FOD BOSA zijn beschikbaar op werkdagen van 8u30 tot 12u30 en van 13u30 tot 16u.'
@@ -1018,10 +1010,6 @@
         },
         appointment: {
           title: 'Sur rendez-vous',
-          text: 'Disponible jusqu\'à 16h.'
-        },
-        office: {
-          title: 'Nos bureaux',
           text: 'Disponible jusqu\'à 16h.'
         }
       },
@@ -1045,10 +1033,6 @@
         appointment: {
           title: 'Nach Vereinbarung',
           text: 'Bis 16 Uhr verfügbar.'
-        },
-        office: {
-          title: 'Unsere Büros',
-          text: 'Bis 16 Uhr verfügbar.'
         }
       },
       info: 'Unsere Kollegen von FOD BOSA sind an Wochentagen von 8:30 bis 12:30 Uhr und von 13:30 bis 16:00 Uhr erreichbar.'
@@ -1064,12 +1048,16 @@
       });
       _this.widgetId = 'widget';
       _this.isChat = false;
+      _this.chatText = null;
       _this.chatId = null;
       _this.isPhone = false;
+      _this.phoneText = null;
       _this.phoneNumber = null;
       _this.isContact = false;
-      _this.contactForm = null;
+      _this.contactText = null;
+      _this.contactUrl = null;
       _this.isAppointment = false;
+      _this.appointmentText = null;
       _this.appointmentUrl = null;
       _this.infoText = null;
       _this.isListeningQuery = false;
@@ -1077,11 +1065,33 @@
         _this.getAttributes();
         _this.addLanguageContent();
         _this.listenChatButton();
+        _this.listenPhoneButton();
+        _this.listenEmailButton();
+        _this.listenAppointmentButton();
+        _this.listenModalClose();
       });
       return _this;
     }
     _inherits(SDGPreFooterWidget, _HTMLElement);
     return _createClass(SDGPreFooterWidget, [{
+      key: "toggleModal",
+      value: function toggleModal(state) {
+        var modal = this.shadowRoot.querySelector('#modal');
+        if (state) {
+          modal.classList.add('active');
+        } else {
+          modal.classList.remove('active');
+        }
+      }
+    }, {
+      key: "addModalContent",
+      value: function addModalContent(title, content) {
+        var modalTitle = this.shadowRoot.querySelector('#modal-title');
+        var modalContent = this.shadowRoot.querySelector('#modal-content');
+        modalTitle.innerHTML = title;
+        modalContent.innerHTML = content;
+      }
+    }, {
       key: "loadTemplate",
       value: function () {
         var _loadTemplate = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
@@ -1118,32 +1128,56 @@
            - listening-query: boolean       // listen query params (default: false)
         */
 
+        // chat
         this.isChat = this.getAttribute('chat') !== null && this.getAttribute('chat') !== 'false';
+        this.chatText = this.getAttribute('chat-text') ? JSON.parse(this.getAttribute('chat-text')) : null;
         this.chatId = this.getAttribute('chat-id') || null;
         this.isPhone = this.getAttribute('phone') !== null && this.getAttribute('phone') !== 'false';
+        // phone
+        this.phoneText = this.getAttribute('phone-text') ? JSON.parse(this.getAttribute('phone-text')) : null;
         this.phoneNumber = this.getAttribute('phone-number') || null;
+        // contact
         this.isContact = this.getAttribute('contact') !== null && this.getAttribute('contact') !== 'false';
-        this.contactForm = this.getAttribute('contact-form') || null;
+        this.contactText = this.getAttribute('contact-text') ? JSON.parse(this.getAttribute('contact-text')) : null;
+        this.contactUrl = this.getAttribute('contact-url') || null;
+        // appointment
         this.isAppointment = this.getAttribute('appointment') !== null && this.getAttribute('appointment') !== 'false';
+        this.appointmentText = this.getAttribute('appointment-text') ? JSON.parse(this.getAttribute('appointment-text')) : null;
         this.appointmentUrl = this.getAttribute('appointment-url') || null;
+        // info
         this.infoText = this.getAttribute('info-text') ? JSON.parse(this.getAttribute('info-text')) : null;
+        // listening query   
         this.isListeningQuery = this.getAttribute('listening-query') !== null && this.getAttribute('listening-query') !== 'false';
+
+        // get the website's language
+        var lang = document.documentElement.lang || 'en';
 
         // set attributes to the widget
         if (this.isChat) {
           this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-chat');
         }
+        if (this.chatText) {
+          this.shadowRoot.querySelector("#".concat(this.widgetId, " #chat-button .text")).innerHTML = this.chatText[lang];
+        }
         if (this.isPhone) {
           this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-phone');
+        }
+        if (this.phoneText) {
+          this.shadowRoot.querySelector("#".concat(this.widgetId, " #phone-button .text")).innerHTML = this.phoneText[lang];
         }
         if (this.isContact) {
           this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-contact');
         }
+        if (this.contactText) {
+          this.shadowRoot.querySelector("#".concat(this.widgetId, " #contact-button .text")).innerHTML = this.contactText[lang];
+        }
         if (this.isAppointment) {
           this.shadowRoot.querySelector("#".concat(this.widgetId)).classList.add('is-appointment');
         }
+        if (this.appointmentText) {
+          this.shadowRoot.querySelector("#".concat(this.widgetId, " #appointment-button .text")).innerHTML = this.appointmentText[lang];
+        }
         if (this.infoText) {
-          var lang = document.documentElement.lang || 'en';
           this.shadowRoot.querySelector("#".concat(this.widgetId, " #info-text")).innerHTML = this.infoText[lang];
         }
 
@@ -1174,7 +1208,7 @@
         this.isPhone = urlParams.has('sdg-pf-phone') && urlParams.get('sdg-pf-phone') === '1';
         this.phoneNumber = urlParams.has('sdg-pf-phone-number') ? urlParams.get('sdg-pf-phone-number') : null;
         this.isContact = urlParams.has('sdg-pf-contact') && urlParams.get('sdg-pf-contact') === '1';
-        this.contactForm = urlParams.has('sdg-pf-contact-url') ? urlParams.get('sdg-pf-contact-url') : null;
+        this.contactUrl = urlParams.has('sdg-pf-contact-url') ? urlParams.get('sdg-pf-contact-url') : null;
         this.isAppointment = urlParams.has('sdg-pf-appointment') && urlParams.get('sdg-pf-appointment') === '1';
         this.appointmentUrl = urlParams.has('sdg-pf-appointment-url') ? urlParams.get('sdg-pf-appointment-url') : null;
         this.text = urlParams.has('sdg-pf-text') ? urlParams.get('sdg-pf-text') : null;
@@ -1188,7 +1222,6 @@
         var phoneButton = this.shadowRoot.querySelector('#phone-button');
         var emailButton = this.shadowRoot.querySelector('#contact-button');
         var appointmentButton = this.shadowRoot.querySelector('#appointment-button');
-        var officeButton = this.shadowRoot.querySelector('#office-button');
         var info = this.shadowRoot.querySelector('#info');
 
         // Get the website's language
@@ -1199,23 +1232,19 @@
         }
         if (chatButton) {
           chatButton.querySelector('.title').textContent = locale.buttons.chat.title;
-          chatButton.querySelector('.description').textContent = locale.buttons.chat.text;
+          chatButton.querySelector('.text').textContent = locale.buttons.chat.text;
         }
         if (phoneButton) {
           phoneButton.querySelector('.title').textContent = locale.buttons.phone.title;
-          phoneButton.querySelector('.description').textContent = locale.buttons.phone.text;
+          phoneButton.querySelector('.text').textContent = locale.buttons.phone.text;
         }
         if (emailButton) {
           emailButton.querySelector('.title').textContent = locale.buttons.email.title;
-          emailButton.querySelector('.description').textContent = locale.buttons.email.text;
+          emailButton.querySelector('.text').textContent = locale.buttons.email.text;
         }
         if (appointmentButton) {
           appointmentButton.querySelector('.title').textContent = locale.buttons.appointment.title;
-          appointmentButton.querySelector('.description').textContent = locale.buttons.appointment.text;
-        }
-        if (officeButton) {
-          officeButton.querySelector('.title').textContent = locale.buttons.office.title;
-          officeButton.querySelector('.description').textContent = locale.buttons.office.text;
+          appointmentButton.querySelector('.text').textContent = locale.buttons.appointment.text;
         }
         if (info) {
           info.textContent = locale.info;
@@ -1246,33 +1275,53 @@
     }, {
       key: "listenPhoneButton",
       value: function listenPhoneButton() {
+        var _this3 = this;
         var phoneButton = this.shadowRoot.querySelector('#phone-button');
         phoneButton.addEventListener('click', function () {
-          console.log('phone');
+          // add the phone number to the modal
+          var lang = document.documentElement.lang || 'en';
+          var locale = locales[lang] || locales['en'];
+          var title = "<div>".concat(locale.buttons.phone.title, "</div>");
+          var content = "\n            <div>\n               <span style=\"font-family: 'Roboto, sans-serif'; font-weight: 400; font-size: 16px; line-height: 22px;\">".concat(locale.buttons.phone.title, ":</span> \n               ").concat(_this3.phoneNumber ? "<a href=\"tel:".concat(_this3.phoneNumber, "\">").concat(_this3.phoneNumber, "</a>") : '', "</div>\n         ");
+          _this3.addModalContent(title, content);
+          _this3.toggleModal(true);
         });
       }
     }, {
       key: "listenEmailButton",
       value: function listenEmailButton() {
+        var _this4 = this;
         var emailButton = this.shadowRoot.querySelector('#contact-button');
         emailButton.addEventListener('click', function () {
-          console.log('email');
+          // redirect to contact form
+          if (_this4.contactUrl) {
+            window.open(_this4.contactUrl, '_blank');
+          } else {
+            console.error('Contact form not found');
+          }
         });
       }
     }, {
       key: "listenAppointmentButton",
       value: function listenAppointmentButton() {
+        var _this5 = this;
         var appointmentButton = this.shadowRoot.querySelector('#appointment-button');
         appointmentButton.addEventListener('click', function () {
-          console.log('appointment');
+          // redirect to appointment form
+          if (_this5.appointmentUrl) {
+            window.open(_this5.appointmentUrl, '_blank');
+          } else {
+            console.error('Appointment form not found');
+          }
         });
       }
     }, {
-      key: "listenOfficeButton",
-      value: function listenOfficeButton() {
-        var officeButton = this.shadowRoot.querySelector('#office-button');
-        officeButton.addEventListener('click', function () {
-          console.log('office');
+      key: "listenModalClose",
+      value: function listenModalClose() {
+        var _this6 = this;
+        var closeButton = this.shadowRoot.querySelector('#close-modal');
+        closeButton.addEventListener('click', function () {
+          _this6.toggleModal(false);
         });
       }
     }]);
