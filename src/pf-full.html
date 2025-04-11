@@ -29,15 +29,15 @@
    <!-- import the assistance-widget element -->
    <link
       rel="stylesheet"
-      href="https://hemadnap.github.io/assistance-widget/dist/bundle.css"
+      href="https://assistance-widget-internal-sdg-assistance-ta.apps.bosa-dt-sdg-01.paas.cloud.dt.bosa.fgov.be/bundle.css"
    />
    <link
       rel="stylesheet"
-      href="https://hemadnap.github.io/assistance-widget/dist/assets/fonts/fonts.css"
+      href="https://assistance-widget-internal-sdg-assistance-ta.apps.bosa-dt-sdg-01.paas.cloud.dt.bosa.fgov.be/assets/fonts/fonts.css"
    />
    <script
       type="module"
-      src="https://hemadnap.github.io/assistance-widget/dist/bundle.js"
+      src="https://assistance-widget-internal-sdg-assistance-ta.apps.bosa-dt-sdg-01.paas.cloud.dt.bosa.fgov.be/bundle.js"
    ></script>
 </head>
 
@@ -61,9 +61,16 @@
    <!-- Pre-footer widget -->
    <sdg-pre-footer-widget
       chat
+      chat-text='{"en":"Available 24/7.", "fr": "Disponible 24/7."}'
       phone
+      phone-text='{"en":"Available until 4pm.", "fr": "Disponible jusqu`à 16h."}'
+      phone-number="0478 123 456"
       contact
+      contact-text='{"en":"Available until 4pm.", "fr": "Disponible jusqu`à 16h."}'
+      contact-url="https://www.bosa.fgov.be/en/contact"
       appointment
+      appointment-text='{"en":"Available until 4pm.", "fr": "Disponible jusqu`à 16h."}'
+      appointment-url="https://www.bosa.fgov.be/en/contact"
       info-text='{"en":"Information in English.", "fr": "Information en Français."}'
    ></sdg-pre-footer-widget>
 </body>

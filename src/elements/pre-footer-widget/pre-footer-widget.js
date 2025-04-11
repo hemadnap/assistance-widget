@@ -20,10 +20,6 @@ const locales = {
             title: 'By appointment',
             text: 'Available until 4pm.'
          },
-         office: {
-            title: 'Our offices',
-            text: 'Available until 4pm.'
-         },
       },
       info: 'Our colleagues from FOD BOSA are available on weekdays from 8:30am to 12:30pm and from 1:30pm to 4pm.',
    },
@@ -44,10 +40,6 @@ const locales = {
          },
          appointment: {
             title: 'Op afspraak',
-            text: 'Beschikbaar tot 16u.'
-         },
-         office: {
-            title: 'Onze kantoren',
             text: 'Beschikbaar tot 16u.'
          },
       },
@@ -72,10 +64,6 @@ const locales = {
             title: 'Sur rendez-vous',
             text: 'Disponible jusqu\'à 16h.'
          },
-         office: {
-            title: 'Nos bureaux',
-            text: 'Disponible jusqu\'à 16h.'
-         },
       },
       info: 'Nos collègues de la FOD BOSA sont disponibles en semaine de 8h30 à 12h30 et de 13h30 à 16h.',
    },
@@ -98,10 +86,6 @@ const locales = {
             title: 'Nach Vereinbarung',
             text: 'Bis 16 Uhr verfügbar.'
          },
-         office: {
-            title: 'Unsere Büros',
-            text: 'Bis 16 Uhr verfügbar.'
-         },
       },
       info: 'Unsere Kollegen von FOD BOSA sind an Wochentagen von 8:30 bis 12:30 Uhr und von 13:30 bis 16:00 Uhr erreichbar.',
    }
@@ -114,12 +98,16 @@ class SDGPreFooterWidget extends HTMLElement {
       this.attachShadow({ mode: 'open' });
       this.widgetId = 'widget';
       this.isChat = false;
+      this.chatText = null;
       this.chatId = null;
       this.isPhone = false;
+      this.phoneText = null;
       this.phoneNumber = null;
       this.isContact = false;
-      this.contactForm = null;
+      this.contactText = null;
+      this.contactUrl = null;
       this.isAppointment = false;
+      this.appointmentText = null;
       this.appointmentUrl = null;
       this.infoText = null
       this.isListeningQuery = false;
@@ -129,7 +117,27 @@ class SDGPreFooterWidget extends HTMLElement {
             this.getAttributes();
             this.addLanguageContent();
             this.listenChatButton();
+            this.listenPhoneButton();
+            this.listenEmailButton();
+            this.listenAppointmentButton();
+            this.listenModalClose();
          })
+   }
+
+   toggleModal (state) {
+      const modal = this.shadowRoot.querySelector('#modal');
+      if (state) {
+         modal.classList.add('active');
+      } else {
+         modal.classList.remove('active');
+      }
+   }
+
+   addModalContent (title, content) {
+      const modalTitle = this.shadowRoot.querySelector('#modal-title');
+      const modalContent = this.shadowRoot.querySelector('#modal-content');
+      modalTitle.innerHTML = title;
+      modalContent.innerHTML = content;
    }
 
    async loadTemplate () {
@@ -152,24 +160,48 @@ class SDGPreFooterWidget extends HTMLElement {
          - listening-query: boolean       // listen query params (default: false)
       */
 
+      // chat
       this.isChat = this.getAttribute('chat') !== null && this.getAttribute('chat') !== 'false';
+      this.chatText = this.getAttribute('chat-text') ? JSON.parse(this.getAttribute('chat-text')) : null;
       this.chatId = this.getAttribute('chat-id') || null;
       this.isPhone = this.getAttribute('phone') !== null && this.getAttribute('phone') !== 'false';
+      // phone
+      this.phoneText = this.getAttribute('phone-text') ? JSON.parse(this.getAttribute('phone-text')) : null;
       this.phoneNumber = this.getAttribute('phone-number') || null;
+      // contact
       this.isContact = this.getAttribute('contact') !== null && this.getAttribute('contact') !== 'false';
-      this.contactForm = this.getAttribute('contact-form') || null;
+      this.contactText = this.getAttribute('contact-text') ? JSON.parse(this.getAttribute('contact-text')) : null;
+      this.contactUrl = this.getAttribute('contact-url') || null;
+      // appointment
       this.isAppointment = this.getAttribute('appointment') !== null && this.getAttribute('appointment') !== 'false';
+      this.appointmentText = this.getAttribute('appointment-text') ? JSON.parse(this.getAttribute('appointment-text')) : null;
       this.appointmentUrl = this.getAttribute('appointment-url') || null;
+      // info
       this.infoText = this.getAttribute('info-text') ? JSON.parse(this.getAttribute('info-text')) : null;
+      // listening query   
       this.isListeningQuery = this.getAttribute('listening-query') !== null && this.getAttribute('listening-query') !== 'false';
+
+      // get the website's language
+      const lang = document.documentElement.lang || 'en';
 
       // set attributes to the widget
       if (this.isChat) { this.shadowRoot.querySelector(`#${this.widgetId}`).classList.add('is-chat') }
+      if (this.chatText) {
+         this.shadowRoot.querySelector(`#${this.widgetId} #chat-button .text`).innerHTML = this.chatText[lang]
+      }
       if (this.isPhone) { this.shadowRoot.querySelector(`#${this.widgetId}`).classList.add('is-phone') }
+      if (this.phoneText) {
+         this.shadowRoot.querySelector(`#${this.widgetId} #phone-button .text`).innerHTML = this.phoneText[lang]
+      }
       if (this.isContact) { this.shadowRoot.querySelector(`#${this.widgetId}`).classList.add('is-contact') }
+      if (this.contactText) {
+         this.shadowRoot.querySelector(`#${this.widgetId} #contact-button .text`).innerHTML = this.contactText[lang]
+      }
       if (this.isAppointment) { this.shadowRoot.querySelector(`#${this.widgetId}`).classList.add('is-appointment') }
+      if (this.appointmentText) {
+         this.shadowRoot.querySelector(`#${this.widgetId} #appointment-button .text`).innerHTML = this.appointmentText[lang]
+      }
       if (this.infoText) {
-         const lang = document.documentElement.lang || 'en';
          this.shadowRoot.querySelector(`#${this.widgetId} #info-text`).innerHTML = this.infoText[lang]
       }
 
@@ -201,7 +233,7 @@ class SDGPreFooterWidget extends HTMLElement {
       this.isPhone = urlParams.has('sdg-pf-phone') && urlParams.get('sdg-pf-phone') === '1';
       this.phoneNumber = urlParams.has('sdg-pf-phone-number') ? urlParams.get('sdg-pf-phone-number') : null;
       this.isContact = urlParams.has('sdg-pf-contact') && urlParams.get('sdg-pf-contact') === '1';
-      this.contactForm = urlParams.has('sdg-pf-contact-url') ? urlParams.get('sdg-pf-contact-url') : null;
+      this.contactUrl = urlParams.has('sdg-pf-contact-url') ? urlParams.get('sdg-pf-contact-url') : null;
       this.isAppointment = urlParams.has('sdg-pf-appointment') && urlParams.get('sdg-pf-appointment') === '1';
       this.appointmentUrl = urlParams.has('sdg-pf-appointment-url') ? urlParams.get('sdg-pf-appointment-url') : null;
       this.text = urlParams.has('sdg-pf-text') ? urlParams.get('sdg-pf-text') : null;
@@ -215,7 +247,6 @@ class SDGPreFooterWidget extends HTMLElement {
       const phoneButton = this.shadowRoot.querySelector('#phone-button');
       const emailButton = this.shadowRoot.querySelector('#contact-button');
       const appointmentButton = this.shadowRoot.querySelector('#appointment-button');
-      const officeButton = this.shadowRoot.querySelector('#office-button');
       const info = this.shadowRoot.querySelector('#info');
 
       // Get the website's language
@@ -227,27 +258,22 @@ class SDGPreFooterWidget extends HTMLElement {
 
       if (chatButton) {
          chatButton.querySelector('.title').textContent = locale.buttons.chat.title;
-         chatButton.querySelector('.description').textContent = locale.buttons.chat.text;
+         chatButton.querySelector('.text').textContent = locale.buttons.chat.text;
       }
 
       if (phoneButton) {
          phoneButton.querySelector('.title').textContent = locale.buttons.phone.title;
-         phoneButton.querySelector('.description').textContent = locale.buttons.phone.text;
+         phoneButton.querySelector('.text').textContent = locale.buttons.phone.text;
       }
 
       if (emailButton) {
          emailButton.querySelector('.title').textContent = locale.buttons.email.title;
-         emailButton.querySelector('.description').textContent = locale.buttons.email.text;
+         emailButton.querySelector('.text').textContent = locale.buttons.email.text;
       }
 
       if (appointmentButton) {
          appointmentButton.querySelector('.title').textContent = locale.buttons.appointment.title;
-         appointmentButton.querySelector('.description').textContent = locale.buttons.appointment.text;
-      }
-
-      if (officeButton) {
-         officeButton.querySelector('.title').textContent = locale.buttons.office.title;
-         officeButton.querySelector('.description').textContent = locale.buttons.office.text;
+         appointmentButton.querySelector('.text').textContent = locale.buttons.appointment.text;
       }
 
       if (info) {
@@ -278,28 +304,49 @@ class SDGPreFooterWidget extends HTMLElement {
    listenPhoneButton () {
       const phoneButton = this.shadowRoot.querySelector('#phone-button');
       phoneButton.addEventListener('click', () => {
-         console.log('phone');
+         // add the phone number to the modal
+         const lang = document.documentElement.lang || 'en';
+         const locale = locales[lang] || locales['en'];
+         const title = `<div>${locale.buttons.phone.title}</div>`
+         const content = `
+            <div>
+               <span style="font-family: 'Roboto, sans-serif'; font-weight: 400; font-size: 16px; line-height: 22px;">${locale.buttons.phone.title}:</span> 
+               ${this.phoneNumber ? `<a href="tel:${this.phoneNumber}">${this.phoneNumber}</a>` : ''}</div>
+         `;
+         this.addModalContent(title, content);
+
+         this.toggleModal(true);
       });
    }
 
    listenEmailButton () {
       const emailButton = this.shadowRoot.querySelector('#contact-button');
       emailButton.addEventListener('click', () => {
-         console.log('email');
+         // redirect to contact form
+         if (this.contactUrl) {
+            window.open(this.contactUrl, '_blank');
+         } else {
+            console.error('Contact form not found');
+         }
       });
    }
 
    listenAppointmentButton () {
       const appointmentButton = this.shadowRoot.querySelector('#appointment-button');
       appointmentButton.addEventListener('click', () => {
-         console.log('appointment');
+         // redirect to appointment form
+         if (this.appointmentUrl) {
+            window.open(this.appointmentUrl, '_blank');
+         } else {
+            console.error('Appointment form not found');
+         }
       });
    }
 
-   listenOfficeButton () {
-      const officeButton = this.shadowRoot.querySelector('#office-button');
-      officeButton.addEventListener('click', () => {
-         console.log('office');
+   listenModalClose () {
+      const closeButton = this.shadowRoot.querySelector('#close-modal');
+      closeButton.addEventListener('click', () => {
+         this.toggleModal(false);
       });
    }
 }

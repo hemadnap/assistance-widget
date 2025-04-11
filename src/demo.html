@@ -13,21 +13,28 @@
 <meta charset=utf-8>
 
 <!-- import the assistance widget -->
-   <link
-      rel="stylesheet"
-      href="https://hemadnap.github.io/assistance-widget/dist/bundle.css"
-   />
-   <link
-      rel="stylesheet"
-      href="https://hemadnap.github.io/assistance-widget/dist/assets/fonts/fonts.css"
-   />
-   <script
-      type="module"
-      src="https://hemadnap.github.io/assistance-widget/dist/bundle.js"
-   ></script>
+<link
+    rel="stylesheet"
+    href="https://hemadnap.github.io/assistance-widget/dist/bundle.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://hemadnap.github.io/assistance-widget/dist/assets/fonts/fonts.css"
+/>
+<script
+    type="module"
+    src="https://hemadnap.github.io/assistance-widget/dist/bundle.js"
+></script>
+
 
 <!-- feedback-widget -->
-<sdg-feedback-widget button-id="fb4761e7-0ee2-48fd-89f3-ae7950f1c946" minimize rating text overlay-close></sdg-feedback-widget>
+<sdg-feedback-widget
+    button-id="fb4761e7-0ee2-48fd-89f3-ae7950f1c946"
+    minimize
+    rating
+    text
+    overlay-close
+></sdg-feedback-widget>
 
 <link
     rel=canonical
@@ -6227,7 +6234,20 @@
         </main>
 
 
-        <sdg-pre-footer-widget chat phone contact appointment></sdg-pre-footer-widget>
+        <sdg-pre-footer-widget
+            chat
+            chat-text='{"en":"Available 24/7.", "fr": "Disponible 24/7."}'
+            phone
+            phone-text='{"en":"Available until 4pm.", "fr": "Disponible jusqu`à 16h."}'
+            phone-number="0478 123 456"
+            contact
+            contact-text='{"en":"Available until 4pm.", "fr": "Disponible jusqu`à 16h."}'
+            contact-url="https://www.bosa.fgov.be/en/contact"
+            appointment
+            appointment-text='{"en":"Available until 4pm.", "fr": "Disponible jusqu`à 16h."}'
+            appointment-url="https://www.bosa.fgov.be/en/contact"
+            info-text='{"en":"Information in English.", "fr": "Information en Français."}'
+        ></sdg-pre-footer-widget>
 
         <footer class="page__wrapper page__wrapper--footer">
             <div class="page__section page__section--footer page__section--footer--top">

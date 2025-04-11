@@ -18,20 +18,20 @@
             class="assistance-button"
          >
             <div class="left">
-               <div class="icon">
+               <div class="icon conversation">
                   <img
-                     src="./assets/icons/conversation.svg"
+                     src="/src/assets/icons/conversation.svg"
                      alt=""
                   >
                </div>
                <div class="content">
                   <div class="title"></div>
-                  <div class="description"></div>
+                  <div class="text"></div>
                </div>
             </div>
             <div class="right">
                <img
-                  src="./assets/icons/chevron-right.svg"
+                  src="/src/assets/icons/chevron-right.svg"
                   alt=""
                >
             </div>
@@ -43,20 +43,20 @@
             class="assistance-button"
          >
             <div class="left">
-               <div class="icon">
+               <div class="icon phone">
                   <img
-                     src="./assets/icons/phone.svg"
+                     src="/src/assets/icons/phone.svg"
                      alt=""
                   >
                </div>
                <div class="content">
                   <div class="title"></div>
-                  <div class="description"></div>
+                  <div class="text"></div>
                </div>
             </div>
             <div class="right">
                <img
-                  src="./assets/icons/chevron-right.svg"
+                  src="/src/assets/icons/chevron-right.svg"
                   alt=""
                >
             </div>
@@ -70,18 +70,18 @@
             <div class="left">
                <div class="icon">
                   <img
-                     src="./assets/icons/message.svg"
+                     src="/src/assets/icons/message.svg"
                      alt=""
                   >
                </div>
                <div class="content">
                   <div class="title"></div>
-                  <div class="description"></div>
+                  <div class="text"></div>
                </div>
             </div>
             <div class="right">
                <img
-                  src="./assets/icons/chevron-right.svg"
+                  src="/src/assets/icons/chevron-right.svg"
                   alt=""
                >
             </div>
@@ -95,18 +95,18 @@
             <div class="left">
                <div class="icon">
                   <img
-                     src="./assets/icons/calendar.svg"
+                     src="/src/assets/icons/calendar.svg"
                      alt=""
                   >
                </div>
                <div class="content">
                   <div class="title"></div>
-                  <div class="description"></div>
+                  <div class="text"></div>
                </div>
             </div>
             <div class="right">
                <img
-                  src="./assets/icons/chevron-right.svg"
+                  src="/src/assets/icons/chevron-right.svg"
                   alt=""
                >
             </div>
@@ -120,18 +120,18 @@
             <div class="left">
                <div class="icon">
                   <img
-                     src="./assets/icons/location.svg"
+                     src="/src/assets/icons/location.svg"
                      alt=""
                   >
                </div>
                <div class="content">
                   <div class="title"></div>
-                  <div class="description"></div>
+                  <div class="text"></div>
                </div>
             </div>
             <div class="right">
                <img
-                  src="./assets/icons/chevron-right.svg"
+                  src="/src/assets/icons/chevron-right.svg"
                   alt=""
                >
             </div>
@@ -143,181 +143,277 @@
          class="info-text"
       ></div>
    </main>
-</div>
 
-<style
-   lang="scss"
-   scoped
->
-   :root {
-      --color-blue: #6EC8F2;
-      --color-dark-blue: #006F9E;
-      --color-black: #2B2D42;
-      --color-gray: #6D6E83;
-      --color-shadow: #0C0F1E1A;
-      --color-background: #FFFFFF;
-      --color-light-gray: #F5F5F5;
-   }
+   <div
+      id="modal"
+      class="modal"
+   >
+      <div class="overlay"></div>
+      <div class="container">
+         <div class="header">
+            <div
+               id="modal-title"
+               class="title"
+            ></div>
+            <a
+               id="close-modal"
+               class="close"
+               href="#"
+               onclick="document.getElementById('modal').classList.remove('active');"
+            >
+               <img
+                  src="/src/assets/icons/close.svg"
+                  alt=""
+               >
+            </a>
+            </span>
 
-   .pre-footer-widget {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 32px;
-      padding: 50px 120px;
-      background: white;
+         </div>
+         <div
+            id="modal-content"
+            class="content"
+         >
 
-      header {
-         display: flex;
-         flex-direction: row;
-         align-items: center;
-         justify-content: flex-start;
-         gap: 10px;
-         width: 100%;
+         </div>
+      </div>
+   </div>
 
-         .title {
-            font-family: 'Barlow', sans-serif;
-            font-weight: 600;
-            font-size: 32px;
-            line-height: 40px;
-            color: #2B2D42;
-         }
+   <style
+      lang="scss"
+      scoped
+   >
+      :root {
+         --color-blue: #6EC8F2;
+         --color-dark-blue: #006F9E;
+         --color-black: #2B2D42;
+         --color-gray: #6D6E83;
+         --color-shadow: #0C0F1E1A;
+         --color-background: #FFFFFF;
+         --color-light-gray: #F5F5F5;
       }
 
-      main {
+      .pre-footer-widget {
          display: flex;
          flex-direction: column;
-         gap: 24px;
-         background-color: var(--color-light-gray);
-         border-radius: 10px;
-         box-shadow: 0 0 10px var(--color-shadow);
+         align-items: flex-start;
+         justify-content: flex-start;
+         gap: 32px;
+         padding: 50px 120px;
+         background: white;
 
-         .button-list {
+         header {
             display: flex;
             flex-direction: row;
-            flex-wrap: wrap;
-            gap: 24px;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            width: 100%;
 
-            .assistance-button {
-               display: none;
-               flex-direction: row;
-               justify-content: space-between;
-               padding: 10px 24px;
-               background: white;
-               border: 2px solid #006F9E;
-               border-radius: 8px;
-               cursor: pointer;
-               width: 279px;
-               height: 80px;
-               transition: .1s;
-
-               &:hover {
-                  background-color: #DAF2FC;
-               }
-
-               &:active {
-                  background-color: #B6E8FF;
-               }
+            .title {
+               font-family: 'Barlow', sans-serif;
+               font-weight: 600;
+               font-size: 32px;
+               line-height: 40px;
+               color: #2B2D42;
             }
+         }
 
-            .left {
+         main {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            background-color: var(--color-light-gray);
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--color-shadow);
+
+            .button-list {
                display: flex;
-               align-items: start;
-               justify-content: center;
-               gap: 12px;
-               padding: 10px 0;
+               flex-direction: row;
+               flex-wrap: wrap;
+               gap: 24px;
 
-               .icon {
-                  padding: 5px 0;
+               .assistance-button {
+                  display: none;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  padding: 10px 24px;
+                  background: white;
+                  border: 2px solid #006F9E;
+                  border-radius: 8px;
+                  cursor: pointer;
+                  width: 279px;
+                  height: 80px;
+                  transition: .1s;
+
+                  &:hover {
+                     background-color: #DAF2FC;
+                  }
+
+                  &:active {
+                     background-color: #B6E8FF;
+                  }
+               }
+
+               .left {
+                  display: flex;
+                  align-items: start;
+                  justify-content: center;
+                  gap: 12px;
+                  padding: 10px 0;
+
+                  .icon {
+                     padding: 5px 0;
+
+                     img {
+                        width: 28px;
+                        height: 28px;
+                     }
+                  }
+
+                  .content {
+                     display: flex;
+                     flex-direction: column;
+                     justify-content: center;
+                     align-items: flex-start;
+                     padding: 10px 0;
+                     gap: 5px;
+
+                     .title {
+                        font-family: 'Barlow', sans-serif;
+                        font-weight: 700;
+                        font-size: 18px;
+                        line-height: 24px;
+                        color: var(--color-dark-blue);
+                     }
+
+                     .text {
+                        font-family: "Roboto", sans-serif;
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: 400;
+                        color: var(--color-gray);
+                     }
+                  }
+               }
+
+               .right {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
 
                   img {
-                     width: 28px;
-                     height: 28px;
-                  }
-               }
-
-               .content {
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: flex-start;
-                  padding: 10px 0;
-                  gap: 5px;
-
-                  .title {
-                     font-family: 'Barlow', sans-serif;
-                     font-weight: 700;
-                     font-size: 18px;
-                     line-height: 24px;
-                     color: var(--color-dark-blue);
-                  }
-
-                  .description {
-                     font-family: "Roboto", sans-serif;
-                     font-size: 14px;
-                     line-height: 20px;
-                     font-weight: 400;
-                     color: var(--color-gray);
+                     width: 16px;
+                     height: 16px;
                   }
                }
             }
 
-            .right {
+            .info-text {
+               font-family: "Roboto", sans-serif;
+               font-weight: 400;
+               font-size: 16px;
+               line-height: 22px;
+               color: #474A5E;
+            }
+         }
+
+
+         &.is-chat {
+            #chat-button {
                display: flex;
-               align-items: center;
-               justify-content: center;
-
-               img {
-                  width: 16px;
-                  height: 16px;
-               }
             }
          }
 
-         .info-text {
-            font-family: "Roboto", sans-serif;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 22px;
-            color: #474A5E;
+         &.is-phone {
+            #phone-button {
+               display: flex;
+            }
+         }
+
+         &.is-contact {
+            #contact-button {
+               display: flex;
+            }
+         }
+
+         &.is-appointment {
+            #appointment-button {
+               display: flex;
+            }
+         }
+
+         &.is-office {
+            #office-button {
+               display: flex;
+            }
          }
       }
 
+      .modal {
+         display: none;
+         position: fixed;
+         z-index: 1;
+         left: 0;
+         top: 0;
+         width: 100vw;
+         height: 100vh;
 
-      &.is-chat {
-         #chat-button {
+         &.active {
             display: flex;
          }
-      }
 
-      &.is-phone {
-         #phone-button {
-            display: flex;
+         .overlay {
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+         }
+
+         .container {
+            position: absolute;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--color-shadow);
+            width: 400px;
+
+            .header {
+               display: flex;
+               flex-direction: row;
+               align-items: center;
+               justify-content: space-between;
+               padding: 10px 0;
+
+               .title {
+                  font-family: 'Montserrat', sans-serif;
+                  font-weight: 600;
+                  font-size: 28px;
+                  line-height: 32px;
+                  color: #09181B;
+               }
+
+               .close {
+                  position: absolute;
+                  top: 10px;
+                  right: 20px;
+                  font-size: 24px;
+                  cursor: pointer;
+               }
+            }
+
+            .content {}
          }
       }
 
-      &.is-contact {
-         #contact-button {
-            display: flex;
-         }
+      /* Mobile breakpoint */
+      @media (max-width: 768px) {
+         .pre-footer-widget {}
       }
-
-      &.is-appointment {
-         #appointment-button {
-            display: flex;
-         }
-      }
-
-      &.is-office {
-         #office-button {
-            display: flex;
-         }
-      }
-   }
-
-   /* Mobile breakpoint */
-   @media (max-width: 768px) {
-      .pre-footer-widget {}
-   }
-</style>
+   </style>

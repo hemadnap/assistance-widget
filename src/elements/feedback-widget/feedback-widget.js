@@ -124,7 +124,7 @@ class SDGFeedbackWidget extends HTMLElement {
             this.isSubmittable = true;
             break;
          default:
-            this.isSubmittable = true;
+            this.isSubmittable = false;
             break;
       }
    }
