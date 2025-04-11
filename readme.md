@@ -1,165 +1,93 @@
-# Assistance Widget
+# AssistanceWidget
 
-## Demo
-You can see the demo of the widget [here](./src)
 
-## Components
----
-### Feedback widget
-The feedback widget is a custom web component that allows users to provide feedback on a website. 
 
-It is designed to be easily integrated into any website and can be customized with various attributes.
+## Getting started
 
-The widget can be opened and closed, and it can display different fields such as rating and text input.
+To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
-#### Attributes:
+Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-    - button-id="String"              Button ID (default: null)
-    - minimized"Boolean"              Is widget minimized when closed (default: false)
-    - rating="Boolean"                Display rating field (default: false)
-    - text-number="String"            Display text field (default: false)
-    - closed="Boolean"                Is widget closed (default: true)
-    - overlay-close-form="Boolean"    Overlay click closes the widget (default: true)
-    - listening-query="Boolean"       Listen query params (default: false)
-    - text-length-limit="Number"      Text length limit (default: 500)
-    - feedback-url="String"           Feedback submit URL (default: null)
+## Add your files
 
-Examples:
-```html
-<!-- Default -->
-<sdg-feedback-widget/>
+- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
+- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
 
-<!-- With parameters -->
-<sdg-feedback-widget
-  button-id="e0f2b1d3-5f7e-4a6b-a0d1-3f2c5e7f8b9c"
-  minimize="true"
-  rating="true"
-  text="true"
-  closed="false"
-  overlay-close="false"
-  listen-query="false"
-></sdg-feedback-widget>
+```
+cd existing_repo
+git remote add origin https://git.fsf.services.belgium.be/sdg/sdg-assistance/assistancewidget.git
+git branch -M master
+git push -uf origin master
 ```
 
-#### Functions:
-The following functions are available to control the widget from the outside:
+## Integrate with your tools
 
-    - `open()`: Opens the widget.
-    - `close()`: Closes the widget.
-    - `displayMinimize()`: Displays the widget in a minimized state.
-    - `hideMinimize()`: Hides the widget in a minimized state.
-    - `displayRating()`: Displays the rating field.
-    - `hideRating()`: Hides the rating field.
-    - `displayText()`: Displays the text field.
-    - `hideText()`: Hides the text field.
+- [ ] [Set up project integrations](https://git.fsf.services.belgium.be/sdg/sdg-assistance/assistancewidget/-/settings/integrations)
 
-Example usage:
-```javascript
-const feedbackWidget = document.querySelector('sdg-feedback-widget');
-feedbackWidget.open();
-feedbackWidget.close();
-feedbackWidget.displayMinimize();
-feedbackWidget.hideMinimize();
-feedbackWidget.displayRating();
-feedbackWidget.hideRating();
-feedbackWidget.displayText();
-feedbackWidget.hideText();
-```
+## Collaborate with your team
 
----
-### Pre-footer widget
-#### Attributes:
-    - chat="Boolean"              Display chat button (default: false)
-    - chat-id="String"            Chat widget id (default: null)
-    - phone="Boolean"             Display phone button (default: false)
-    - phone-number="String"       Phone number (default: null)
-    - contact="Boolean"           Display contact button (default: false)
-    - contact-form="String"       Contact form url (default: null)
-    - appointment="Boolean"       Display appointment button (default: false)
-    - appointment-url="String"    Appointment url (default: null)
-    - info-text="JSON"            Display info text (default: null) -> {"en": "Info text in English", "fr": "Info text in French"}
-    - listening-query="Boolean"   Listen query params (default: false)
+- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
+- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
+- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
+- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
+- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-#### Examples:
-```html
-<!-- Default -->
-<sdg-pre-footer-widget/>
+## Test and Deploy
 
-<!-- With parameters -->
-<sdg-pre-footer-widget
-  chat
-  phone
-  phone-number="123456789"
-  contact
-  contact-form="https://example.com/contact"
-  appointment
-  appointment-url="https://example.com/appointment"
-  info-text='{"en": "Info text in English", "fr": "Info text in French"}'
-  listening-query="false"
-></sdg-pre-footer-widget>
-```
+Use the built-in continuous integration in GitLab.
 
-## Local usage
-You can run the project locally using the following command:
-```bash
-npm i
-npm run build:watch
+- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
+- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
+- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
+- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
+- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
 
-# Run a local server to serve the files
-http-server
-```
+***
 
+# Editing this README
 
-## Build
-To build the project for production, use the following command:
-```bash
-npm run build
-```
+When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
-This will output "/dist/bundle.js" file that can be exported to any website.
+## Suggestions for a good README
 
-## Embedding
-To embed the widget into your website, you need to include the following script in your HTML file:
-```html
-<!-- Include the bundle style -->
-<link rel="stylesheet" href="/dist/bundle.css">
+Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
 
-<!-- Include the bundle script -->
-<script src="/dist/bundle.js"></script>
-```
+## Name
+Choose a self-explaining name for your project.
 
+## Description
+Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-<!--## Local back office
-http://localhost:8082/swagger-ui/index.html
+## Badges
+On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
- - login
-{
-  "email": "admin@example.com",
-  "password": "MTIzNA=="
-}
+## Visuals
+Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
-- get token and set it to authorize-->
+## Installation
+Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
+## Usage
+Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
+## Support
+Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
 
-<!--### get button id
-- get services
-{
-  "first": 0,
-  "rows": 10
-}
+## Roadmap
+If you have ideas for releases in the future, it is a good idea to list them in the README.
 
-- get buttons
-{
-  "first": 0,
-  "rows": 10,
-  "serviceId": "ae612fd4-c549-4d74-bb9c-09a4a01c2218"
-}
+## Contributing
+State if you are open to contributions and what your requirements are for accepting them.
 
--> retrieve feedback
-{
-  "first": 0,
-  "rows": 100,
-  "serviceId": "ae612fd4-c549-4d74-bb9c-09a4a01c2218",
-  "globalFilter":"yyy"
-}-->
+For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+
+You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+
+## Authors and acknowledgment
+Show your appreciation to those who have contributed to the project.
+
+## License
+For open source projects, say how it is licensed.
+
+## Project status
+If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
